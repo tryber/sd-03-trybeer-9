@@ -6,28 +6,36 @@ const UserRegisterForm = () => {
   const [password, setPassword] = useState();
   const [check, setCheck] = useState(false);
   const [nameWarning, setNameWarning] = useState('');
-  // let nameWarning = '';
+  const [emailWarning, setEmailWarning] = useState('');
+  const [passwordWarning, setPasswordWarning] = useState('');
 
   useEffect(() => {
     if (name) {
-      const nameVerify = new RegExp(/[a-z]/i);
-      let checking = `${nameVerify.test(name)}${name.length > 12}`
-      switch (checking) {
-        case 'falsefalse':
-          setNameWarning('O nome deve conter apenas letras e ter no mínimo 12 caracteres');
-          break;
-        case 'truefalse':
-          setNameWarning('O nome deve ter no mínimo 12 caracteres');
-          break;
-        default:
-          setNameWarning('');
-      };
-      console.log('Nome:', name, nameWarning, checking);
+      // Ref. https://stackoverflow.com/questions/4745112/javascript-regex-for-alphanumeric-string-with-length-of-3-5-chars
+      const nameVerify = new RegExp(/^([a-zA-Z\s]){12}$/);
+      if (!nameVerify.test(name)) {
+        setNameWarning('O nome deve conter 12 caracters e apenas letras');
+      }
+      if (nameVerify.test(name)) {
+        setNameWarning('');
+      }
     }
-    else {
+    if (!name) {
       setNameWarning('');
     }
-  }, [name]);
+    if (email) {
+      const emailVerify = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+      if (!emailVerify.test(email)) {
+        setEmailWarning('Digite um email válido');
+      }
+      if (emailVerify.test(email)) {
+        setEmailWarning('');
+      }
+    }
+    if (!email) {
+      setEmailWarning('');
+    }
+  }, [name, email, password]);
 
   return (
     <div>
