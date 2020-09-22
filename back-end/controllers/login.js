@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const model = require('../models/login');
+const { getAll } = require('../models/login');
 
 const login = Router();
 
 login.get('/', async (req, res) => {
-  const result = await model.getAll();
+  const result = await getAll();
   return res.status(200).json(result);
 });
 
