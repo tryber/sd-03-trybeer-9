@@ -1,10 +1,10 @@
 import React from 'react';
-import userRegisterForm from '../components/UserRegisterForm';
+import UserRegisterForm from '../components/UserRegisterForm';
 
-function userRegisterPage() {
+function UserRegisterPage() {
   return (
-    <userRegisterForm />
+    <UserRegisterForm />
   );
 };
 
-export default userRegisterPage;
+export default UserRegisterPage;
