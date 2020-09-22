@@ -12,7 +12,7 @@ const UserRegisterForm = () => {
   useEffect(() => {
     if (name) {
       // Ref. https://stackoverflow.com/questions/4745112/javascript-regex-for-alphanumeric-string-with-length-of-3-5-chars
-      const nameVerify = new RegExp(/^([a-zA-Z\s]){12}$/);
+      const nameVerify = new RegExp(/^([a-zA-Z\s]){12-100}$/);
       if (!nameVerify.test(name)) {
         setNameWarning('O nome deve conter 12 caracters e apenas letras');
       }
@@ -38,7 +38,7 @@ const UserRegisterForm = () => {
     }
     if (password) {
       // Regex criada por mim mesmo
-      const passwordVerify = new RegExp(/([0-9]){6}$/);
+      const passwordVerify = new RegExp(/([0-9]){6-50}$/);
       if (!passwordVerify.test(password)) {
         setPasswordWarning('A senha deve conter apenas número e ter tamanho mínimo de 6 caracteres');
       }
@@ -51,6 +51,11 @@ const UserRegisterForm = () => {
     }
   }, [name, email, password]);
 
+  let lock = false;
+  if (name && email && password) lock = true;
+  let lock2 = false;
+  if (!nameWarning && !emailWarning && !passwordWarning) lock2 = true;
+  console.log('locks: ', lock, lock2);
   return (
     <div>
       <form>
@@ -76,7 +81,7 @@ const UserRegisterForm = () => {
       <button
         data-testid="signup-btn" type="submit"
         onClick={() => console.log(name)}
-        enable={name&&password&&email&&!(nameWarning&&emailWarning&&passwordWarning)}
+        enable={1}
       >CADASTRAR</button>
       </form>
     </div>
