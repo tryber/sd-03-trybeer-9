@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './style/MenuTop.css';
 
 function MenuTop() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const showAside = () => {
     return (
