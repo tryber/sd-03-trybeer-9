@@ -1,6 +1,5 @@
 require('dotenv').config();
 const msqlx = require('@mysql/xdevapi');
-console.log(process.env.MYSQL_USER, process.env.HOSTNAME);
 
 let connect;
 
@@ -12,10 +11,11 @@ const config = {
 };
 
 module.exports = () => {
-  if (connect) return Promise.resolve(connect)
+  if (connect) return Promise.resolve(connect);
   return msqlx.getSession(config)
     .then(async (session) => {
-      connect = await session.getSchema('Trybeer')
+      connect = await session.getSchema('Trybeer');
       return connect;
-    }).catch((err) => console.error(err) && process.exit(1));
+    })
+    .catch((err) => console.error(err) && process.exit(1));
 };

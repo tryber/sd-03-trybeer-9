@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import RegisterUserAPI from '../services/UserRegisterService';
 
 const UserRegisterForm = () => {
   const [name, setName] = useState();
@@ -9,6 +10,15 @@ const UserRegisterForm = () => {
   const [emailWarning, setEmailWarning] = useState('');
   const [passwordWarning, setPasswordWarning] = useState('');
   const [showButton, setShowButton] = useState(false);
+  let role = 'client';
+
+  usseEffect(() => {
+    if (check) {
+      role = 'administrator';
+    } else {
+      role = 'client';
+    }
+  }, [check]);
 
   useEffect(() => {
     // habilita botao
@@ -94,6 +104,12 @@ const UserRegisterForm = () => {
         disabled={!showButton}
       >Cadastrar</button>
       </fieldset>
+      <button onClick={() => {
+        const result = RegisterUserAPI(name, email, password, role);
+        if (result) console.log('Resultado da request: ', result);
+        }
+      }
+      >Acessa BackEnd</button>
     </div>
   );
 };

@@ -1,17 +1,14 @@
 const express = require('express');
-const login = require('./controllers/login');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
+const login = require('./controllers/login');
+const userRegister = require('./controllers/userRegister');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(cors(), bodyParser.json());
 
 app.use('/login', login);
-app.post('/register', (req, res) => {
-  const body = req.body;
-  console.log(body);
-  res.status(200).send(body);
-});
+app.use('/register', userRegister);
 
 const PORT = process.env.PORT || 3001;
 

@@ -2,9 +2,16 @@ import axios from 'axios';
 
 const headers = {
   'Content-Type': 'application/json',
-}
+};
 
-const RegisterUserAPI = axios.post(`localhost:3001/register`, {json: "Eu sou um josn"}, headers)
-.then(res => res.data);
+const RegisterUserAPI = (name, email, password, role) => axios.post('http://localhost:3001/register',
+  {
+    name,
+    email,
+    password,
+    role,
+  },
+  headers)
+  .then((res) => res);
 
 export default RegisterUserAPI;
