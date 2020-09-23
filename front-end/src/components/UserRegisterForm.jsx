@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import RegisterUserAPI from '../services/UserRegisterService';
+
+const createUserAPI = async (name, email, password, role) => {
+  return await RegisterUserAPI(name, email, password, role)
+    .then((data) =>  data)
+    .catch((error) => error);
+};
 
 const UserRegisterForm = () => {
   const [name, setName] = useState();
@@ -10,9 +17,11 @@ const UserRegisterForm = () => {
   const [emailWarning, setEmailWarning] = useState('');
   const [passwordWarning, setPasswordWarning] = useState('');
   const [showButton, setShowButton] = useState(false);
+  const [backendResponse, setBackendResponse] = useState('');
+  const [redirectTo, setRedirectTo] = useState('');
   let role = 'client';
 
-  usseEffect(() => {
+  useEffect(() => {
     if (check) {
       role = 'administrator';
     } else {
@@ -73,6 +82,10 @@ const UserRegisterForm = () => {
     }
   }, [name, email, password]);
 
+  if (redirectTo) {
+    return (<Redirect to={redirectTo} />);
+  }
+
   return (
     <div>
       <fieldset>
@@ -100,16 +113,23 @@ const UserRegisterForm = () => {
       /><span>Quero Vender</span><br/>
       <button
         data-testid="signup-btn" type="submit"
-        onClick={() => console.log(name)}
+        onClick={ async () => {
+          const result = await createUserAPI(name, email, password, role);
+          if (result) {
+            if (result.message) {
+              return setBackendResponse('E-mail already in database.');
+            }
+            if (role === 'administrator') {
+              return setRedirectTo('/admin/orders');
+            }
+            return setRedirectTo('/products');
+            }
+          }
+        }
         disabled={!showButton}
       >Cadastrar</button>
       </fieldset>
-      <button onClick={() => {
-        const result = RegisterUserAPI(name, email, password, role);
-        if (result) console.log('Resultado da request: ', result);
-        }
-      }
-      >Acessa BackEnd</button>
+      <div><span>{backendResponse}</span></div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ const RegisterUserAPI = (name, email, password, role) => axios.post('http://loca
     role,
   },
   headers)
-  .then((res) => res);
+  .then((res) => res)
+  .catch((error) => error);
 
 export default RegisterUserAPI;
