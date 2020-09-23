@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const BeerContext = createContext();
 
-const ContextProvider = ({ children }) => {
+const BeerProvider = ({ children }) => {
   const context = {
     state: 'grupo09',
   };
@@ -15,8 +15,8 @@ const ContextProvider = ({ children }) => {
   );
 };
 
-export default ContextProvider;
-
-ContextProvider.propTypes = {
+BeerProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default BeerProvider;

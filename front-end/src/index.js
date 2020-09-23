@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import ContextProvider from './context/context';
+import BeerProvider from './context/context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
+    <BeerProvider>
       <App />
-    </ContextProvider>
+    </BeerProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
