@@ -5,8 +5,8 @@ const getAllProducts = async () => connection()
     .select('id', 'name', 'price', 'url_image')
     .execute())
   .then((res) => res.fetchAll())
-  .then((result) => result.map(([id, name, price, url_image]) => ({ id, name, price, url_image })))
+  .then((result) => result.map(([id, name, price, url_image]) => ({ id, name, price, url_image })));
 
 module.exports = {
   getAllProducts,
-}
+};

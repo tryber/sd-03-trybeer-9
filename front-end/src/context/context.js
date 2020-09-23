@@ -5,7 +5,7 @@ export const BeerContext = createContext();
 
 const BeerProvider = ({ children }) => {
   const [basket, setBasket] = useState([]);
-  const [price, setTotalPrice] = useState(0);
+  const [price, setTotalPrice] = useState('0');
 
   const context = {
     shopCart: {
@@ -13,11 +13,11 @@ const BeerProvider = ({ children }) => {
       setBasket,
       price,
       setTotalPrice,
-    }
+    },
   };
 
   return (
-    <BeerContext.Provider value={context}>
+    <BeerContext.Provider value={ context }>
       {children}
     </BeerContext.Provider>
   );

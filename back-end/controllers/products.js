@@ -8,4 +8,4 @@ products.get('/products', async (req, res) => {
   return res.status(200).json(allProducts);
 });
 
-module.exports =  products;
+module.exports = products;
