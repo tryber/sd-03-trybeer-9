@@ -1,11 +1,15 @@
 const jwt = require('jsonwebtoken');
 
 const secret = 'trybeer-grupo9';
-const header = { alg: 'HS256', typ: 'jwt' };
 
-module.exports = (req, res, next) => {
-  const { email, password } = req;
-  const token = jwt.sign({ email, password }, secret, header);
-  res.token = token;
-  next();
+module.exports = (req, res) => {
+  const token = req.headers.authorization;
+  try {
+    const decoded = jwt.verify(token, secret);
+    if (decoded) return res.status(200).send('logado');
+  } catch (err) {
+    return res.status(400).send('não logado');
+  }
+
+  // res.token = token;
 };

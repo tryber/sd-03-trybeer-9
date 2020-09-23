@@ -15,6 +15,8 @@ const ContextProvider = ({ children }) => {
   );
 };
 
+export default ContextProvider;
+
 ContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
