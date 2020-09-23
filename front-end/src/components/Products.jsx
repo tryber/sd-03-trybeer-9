@@ -45,7 +45,7 @@ function Products() {
 
   return (
     <div className="render-cards">
-      {dataApi.map(({ id, name, price, url_image }) => cardProducts(id, name, price, url_image, basket, setBasket))}
+      {dataApi.map(({ id, name, price, urlImage }) => cardProducts(id, name, price, urlImage, basket, setBasket))}
       <button></button>
     </div>
   )
