@@ -8,11 +8,23 @@ const UserRegisterForm = () => {
   const [nameWarning, setNameWarning] = useState('');
   const [emailWarning, setEmailWarning] = useState('');
   const [passwordWarning, setPasswordWarning] = useState('');
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
+    // habilita botao
+    let inputsAreFilled = false;
+    if (name && email && password) inputsAreFilled = true;
+    let inputsAreValids = false;
+    if (!nameWarning && !emailWarning && !passwordWarning) inputsAreValids = true;
+    if (inputsAreFilled && inputsAreValids) setShowButton(true);
+    if (!(inputsAreFilled && inputsAreValids)) setShowButton(false);
+  }, [nameWarning, emailWarning, passwordWarning]);
+
+  useEffect(() => {
+    // Valida as entradas
     if (name) {
       // Ref. https://stackoverflow.com/questions/4745112/javascript-regex-for-alphanumeric-string-with-length-of-3-5-chars
-      const nameVerify = new RegExp(/^([a-zA-Z\s]){12-100}$/);
+      const nameVerify = new RegExp(/^([a-zA-Z\s]){12,100}$/);
       if (!nameVerify.test(name)) {
         setNameWarning('O nome deve conter 12 caracters e apenas letras');
       }
@@ -38,7 +50,7 @@ const UserRegisterForm = () => {
     }
     if (password) {
       // Regex criada por mim mesmo
-      const passwordVerify = new RegExp(/([0-9]){6-50}$/);
+      const passwordVerify = new RegExp(/([0-9]){6,50}$/);
       if (!passwordVerify.test(password)) {
         setPasswordWarning('A senha deve conter apenas número e ter tamanho mínimo de 6 caracteres');
       }
@@ -51,14 +63,9 @@ const UserRegisterForm = () => {
     }
   }, [name, email, password]);
 
-  let lock = false;
-  if (name && email && password) lock = true;
-  let lock2 = false;
-  if (!nameWarning && !emailWarning && !passwordWarning) lock2 = true;
-  console.log('locks: ', lock, lock2);
   return (
     <div>
-      <form>
+      <fieldset>
       <label htmlFor="name">Nome</label>
       <input
         data-testid="signup-name" type="text" name="name"
@@ -71,19 +78,22 @@ const UserRegisterForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         required={true}
       /><span>{emailWarning}</span><br/>
-      <label htmlFor="password">Senha</label>
+      <label htmlFor="password">Password</label>
       <input
         data-testid="signup-password" type="password" name="password"
         onChange={(e) => setPassword(e.target.value)}
         required={true}
       /><span>{passwordWarning}</span><br/>
-      <input data-testid="signup-seller" type="checkbox" name="vendor" checked={check} onChange={(e) => setCheck(e.target.checked)}/><span>Quero vender</span><br/>
+      <input
+        data-testid="signup-seller" type="checkbox" name="vendor"
+        checked={check} onChange={(e) => setCheck(e.target.checked)}
+      /><span>Quero Vender</span><br/>
       <button
         data-testid="signup-btn" type="submit"
         onClick={() => console.log(name)}
-        enable={1}
-      >CADASTRAR</button>
-      </form>
+        disabled={!showButton}
+      >Cadastrar</button>
+      </fieldset>
     </div>
   );
 };
