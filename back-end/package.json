@@ -16,9 +16,17 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+<<<<<<< HEAD
     "@mysql/xdevapi": "^8.0.20",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+=======
+    "@mysql/xdevapi": "^8.0.21",
+    "@types/jest": "25.1.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+>>>>>>> 077462ee07717782ecb179f27ecde21912264f5f
     "express": "^4.17.1",
     "express-rescue": "^1.1.26",
     "jsonwebtoken": "^8.5.1",

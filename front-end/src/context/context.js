@@ -1,22 +1,23 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const BeerContext = createContext();
+export const BeerContext = createContext();
 
-const ContextProvider = ({ children }) => {
+const BeerProvider = ({ children }) => {
+  const [title, setTitle] = useState('');
   const context = {
-    state: 'grupo09',
+    title, setTitle, teste: 2,
   };
 
   return (
     <BeerContext.Provider value={ context }>
-      { children }
+      {children}
     </BeerContext.Provider>
   );
 };
 
-ContextProvider.propTypes = {
+BeerProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default ContextProvider;
+export default BeerProvider;
