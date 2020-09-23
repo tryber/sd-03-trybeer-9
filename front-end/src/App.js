@@ -8,9 +8,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/register" component={UserRegisterPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/register" component={ UserRegisterPage } />
+          <Route exact path="/login" component={ LoginPage } />
+          <Route exact path="/" component={ LoginPage } />
         </Switch>
       </BrowserRouter>
     </div>
