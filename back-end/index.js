@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-//https://stackoverflow.com/questions/50968152/cross-origin-request-blocked-with-react-and-express
+// https://stackoverflow.com/questions/50968152/cross-origin-request-blocked-with-react-and-express
 const cors = require('cors');
 const login = require('./controllers/login');
 
