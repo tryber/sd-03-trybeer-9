@@ -1,13 +1,7 @@
 const { Router } = require('express');
-const model = require('../models/login');
 const service = require('../services');
 
 const login = Router();
-
-login.get('/', async (req, res) => {
-  const result = await model.getAll();
-  return res.status(200).json(result);
-});
 
 login.post('/', async (req, res) => {
   const { email, password } = req.body;

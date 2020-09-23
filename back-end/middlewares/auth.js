@@ -10,6 +10,4 @@ module.exports = (req, res) => {
   } catch (err) {
     return res.status(400).send('não logado');
   }
-
-  // res.token = token;
 };
