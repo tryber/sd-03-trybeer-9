@@ -2,19 +2,19 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import './style/Products.css';
 import { BeerContext } from '../context/context';
+import MenuTop from './MenuTop';
 
 const addTobascket = (price, name, setCart) => {
   const item = { price, name };
   setCart(currentState => [...currentState, item]);
-  return localStorage.setItem('cart', name)
+  return localStorage.setItem('cart', JSON.stringify({
+    price, name
+  }));
 }
 
 const removeToBascket = (price, name, setCart) => {
   const item = { price, name };
-
 }
-
-
 
 const cardProducts = (id, name, price, photo, setCart, cart, total) => (
   <div
@@ -37,23 +37,28 @@ const cardProducts = (id, name, price, photo, setCart, cart, total) => (
 
 function Products() {
   const [dataApi, setDataApi] = useState([])
-  const { cart, setCart } = useContext(BeerContext);
+  const { cart, setCart, setTitle } = useContext(BeerContext);
   const total = cart.reduce((acc, actual) => acc + actual.price, 0);
 
-  useEffect(() => axios.get('http://localhost:3001/products')
-    .then(({ data }) => setDataApi(data)), []);
+  useEffect(() => {
+    setTitle('Products')
+    axios.get('http://localhost:3001/products')
+      .then(({ data }) => setDataApi(data))
+  }, []);
 
-
-  console.log('aqui', cart)
+  console.log('aqui', dataApi)
 
   return (
-    <div className="render-cards">
-      {dataApi.map(({ id, name, price, urlImage }) => cardProducts(id, name, price, urlImage, setCart, cart, total))}
-      <div>
-        <button data-testid="checkout-bottom-btn" >Ver carrinho: {total.toFixed(2)}</button>
-        <p data-testid="0-product-qtd"> total: {cart.length}</p>
+    <>
+      <MenuTop />
+      <div className="render-cards">
+        {dataApi.map(({ id, name, price, urlImage }) => cardProducts(id, name, price, urlImage, setCart, cart, total))}
+        <div>
+          <button data-testid="checkout-bottom-btn" >Ver carrinho: {total.toFixed(2)}</button>
+          <p data-testid="0-product-qtd"> total: {cart.length}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

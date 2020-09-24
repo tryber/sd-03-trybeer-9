@@ -6,9 +6,7 @@ import BeerProvider from './context/context';
 
 ReactDOM.render(
   <BeerProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </BeerProvider>,
   document.getElementById('root'),
 );
