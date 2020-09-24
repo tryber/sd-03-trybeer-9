@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/admin/orders" />
-        <Rot path="/checkout" component={ Checkout } />
+        <Route path="/checkout" component={ Checkout } />
         <Route path="/login" component={ Login } />
         <Route path="/profile" component={ Profile } />
         <Route path="/products" component={ Products } />
