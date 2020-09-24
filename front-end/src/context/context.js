@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 export const BeerContext = createContext();
 
 const BeerProvider = ({ children }) => {
-  const [basket, setBasket] = useState([]);
-  const [price, setTotalPrice] = useState('0');
+  const [cart, setCart] = useState([]);
+  // const [price, setTotalPrice] = useState('0');
 
   const context = {
-    shopCart: {
-      basket,
-      setBasket,
-      price,
-      setTotalPrice,
-    },
+    cart,
+    setCart,
   };
 
   return (
-    <BeerContext.Provider value={ context }>
+    <BeerContext.Provider value={context}>
       {children}
     </BeerContext.Provider>
   );
