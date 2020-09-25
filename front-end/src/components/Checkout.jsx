@@ -104,7 +104,10 @@ const Checkout = () => {
     const response = await createOrderAPI(orderJson);
     if (response.status === 201) {
       // delete o localStorage
-      localStorageCart = [];
+      // Sobreescreva o localStorage como novo conteudo de cart
+      localStorage.setItem('cart', JSON.stringify([]));
+      // Atualize o estado
+      // setLocalStorageActualized(true);
       return setMessage('Compra realizada com sucesso!');
     }
   };
