@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './style/MenuTop.css';
 import { BeerContext } from '../context/context';
+import './style/MenuTop.css';
 
 function MenuTop() {
   const [open, setOpen] = useState(false);
-  const { title } = useContext(BeerContext);
+  const { title, setTitle } = useContext(BeerContext);
 
   const showAside = () => (
-    <div className="showAside">
+    <div data-testid=".side-menu-container" className="showAside">
       <Link className="link-aside" data-testid="side-menu-item-products" to="/products">Produtos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-profile" to="/profile">Meu Perfil</Link>
@@ -21,7 +21,7 @@ function MenuTop() {
       data-testid="top-hamburguer"
       className="menu-btn"
       type="button"
-      onClick={ () => setOpen(true) }
+      onClick={() => setOpen(true)}
     >
       <div className="menu-toggle" />
       <div className="menu-toggle" />
@@ -33,20 +33,19 @@ function MenuTop() {
     <button
       data-testid="top-hamburguer"
       className="menu-btn"
-      type="button"
-      onClick={ () => setOpen(false) }
-    >
+      type="button" onClick={() => setOpen(false)}>
       <div className="menu-toggle" />
       <div className="menu-toggle" />
       <div className="menu-toggle" />
-      <div>
+      <div className="render-aside">
         {showAside()}
       </div>
     </button>
   );
 
   return (
-    <header className="header">
+    <header className="header" >
+      {setTitle('TryBeer')}
       {open ? menuToggle() : asideLinks()}
       <h1 className="top-title" data-testid="top-title">{title}</h1>
     </header>

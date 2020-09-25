@@ -4,9 +4,15 @@ import PropTypes from 'prop-types';
 export const BeerContext = createContext();
 
 const BeerProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
   const [title, setTitle] = useState('');
+
   const context = {
-    title, setTitle, teste: 2,
+    cart,
+    setCart,
+    title,
+    setTitle,
+    teste: 2,
   };
 
   return (

@@ -22,6 +22,8 @@ function App() {
         <Route path="/profile" component={ Profile } />
         <Route path="/products" component={ Products } />
         <Route path="/register" component={ UserRegisterPage } />
+        <Route path="/orders" component={ Products } />
+        <Route path="/checkout" component={ Products } />
         <Route path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
