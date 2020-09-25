@@ -6,6 +6,7 @@ const cors = require('cors');
 const login = require('./controllers/login');
 const profile = require('./controllers/profile');
 const userRegister = require('./controllers/userRegister');
+const checkout = require('./controllers/checkout');
 
 const app = express();
 app.use(cors(), bodyParser.json());
@@ -13,6 +14,7 @@ app.use(cors(), bodyParser.json());
 app.use(cors());
 app.use('/', bodyParser.json());
 
+app.use('/checkout', checkout);
 app.use('/login', login);
 app.use('/profile', profile);
 app.use('/register', userRegister);
