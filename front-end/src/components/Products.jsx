@@ -61,7 +61,7 @@ const cartInStorage = (cart) => {
 
 function Products() {
   const [dataApi, setDataApi] = useState([])
-  const { cart, setCart } = useContext(BeerContext);
+  const { cart, setCart, setTitle } = useContext(BeerContext);
   const [redirectLogin, setRedirectLogin] = useState(false);
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
 
@@ -69,6 +69,7 @@ function Products() {
     instance.get('/profile', { headers: { Authorization: token } }).catch(() => setRedirectLogin(true))
     instance.get('/products')
       .then(({ data }) => setDataApi(data))
+      // setTitle('Products');
   }, [token]);
 
   const sumLocalStorage = localStorage.getItem('cart');

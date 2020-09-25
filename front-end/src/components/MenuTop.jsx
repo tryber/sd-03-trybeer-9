@@ -8,7 +8,7 @@ function MenuTop() {
   const { title, setTitle } = useContext(BeerContext);
 
   const showAside = () => (
-    <div data-testid=".side-menu-container" className="showAside">
+    <div  className="showAside">
       <Link className="link-aside" data-testid="side-menu-item-products" to="/products">Produtos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-profile" to="/profile">Meu Perfil</Link>
@@ -37,7 +37,7 @@ function MenuTop() {
       <div className="menu-toggle" />
       <div className="menu-toggle" />
       <div className="menu-toggle" />
-      <div className="render-aside">
+      <div className=".side-menu-container">
         {showAside()}
       </div>
     </button>
