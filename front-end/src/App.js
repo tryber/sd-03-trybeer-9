@@ -22,7 +22,6 @@ function App() {
         <Route path="/register" component={ UserRegisterPage } />
         <Route path="/orders" component={ Products } />
         <Route path="/checkout" component={ Products } />
-        {/* fake ^^ */}
         <Route path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
