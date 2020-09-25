@@ -66,10 +66,10 @@ function Products() {
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
+    setTitle('TryBeer');
     instance.get('/profile', { headers: { Authorization: token } }).catch(() => setRedirectLogin(true))
     instance.get('/products')
       .then(({ data }) => setDataApi(data))
-      // setTitle('Products');
   }, [token]);
 
   const sumLocalStorage = localStorage.getItem('cart');
