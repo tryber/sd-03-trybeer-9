@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SaleOrderAPI from '../services/SaleOrderService';
 
 const createOrderAPI = async ({
@@ -22,13 +22,22 @@ const createOrderAPI = async ({
 };
 
 // Se o localStorage existe
-const localStorageCart = [
-  {'Skol Lata 250ml': 2.20},
-  {'Heineken 600ml': 7.50},
-  {'Antarctica Pilsen 300ml': 2.49},
-  {'Brahma 600ml': 7.50},
-  {'Skol Lata 250ml': 2.20},
-];
+const localStorageCart = [];
+const cart = localStorage.getItem('cart');
+if (cart !== '[]') {
+  console.log(cart);
+  localStorageCart.push(...JSON.parse(cart));
+  console.log(localStorageCart); 
+} else {
+  // Testes
+  // localStorageCart.push(
+  //   {'Skol Lata 250ml': 2.20},
+  //   {'Heineken 600ml': 7.50},
+  //   {'Antarctica Pilsen 300ml': 2.49},
+  //   {'Brahma 600ml': 7.50},
+  //   {'Skol Lata 250ml': 2.20},
+  // );
+}
 
 // Se o localStorage não existe
 // const localStorageCart = [];
@@ -36,6 +45,13 @@ const localStorageCart = [
 const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [deliveryNumber, setDeliveryNumber] = useState();
+  const [message, setMessage] = useState('');
+  const [localStorageActualized, setLocalStorageActualized] = useState(false);
+
+  useEffect(() => {
+    // Inicializacao do sensor de mudança do localStorage
+    setLocalStorageActualized(() => false);
+  });
 
   // Criando um array com os nomes das keys das chaves
   const quantityArray = localStorageCart.map((e) => Object.keys(e));
@@ -60,7 +76,6 @@ const Checkout = () => {
         price: localStorageCart[i][`${keys[i]}`],
       })
   }
-  // console.log('Listar Carrinho: ', listCart);
 
   // Calcula o valor total do pedido
   let totalPrice = listCart.reduce(((accum, { price }) =>
@@ -74,6 +89,9 @@ const Checkout = () => {
   const sendOrder = async () => {
     // Ref. https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     const saleDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    if (!deliveryAddress || !deliveryNumber) {
+      return setMessage('Todos os campos devem ser preenchidos!');
+    }
     const orderJson = 
     {
       userId: 2,
@@ -84,7 +102,39 @@ const Checkout = () => {
       status: 'Pendente',
     };
     const response = await createOrderAPI(orderJson);
-    console.log('Resposta: ', response);
+    if (response.status === 201) {
+      // delete o localStorage
+      localStorageCart = [];
+      return setMessage('Compra realizada com sucesso!');
+    }
+  };
+
+  const removeItem = (item) => {
+    const newCart = [];
+    const numberOfItems = [];
+    quantityKeysArray.forEach((e, i) => {
+      if (e === item) numberOfItems.push(i);
+    });
+
+    // Se quiser excluir todas as quantidades use o laço for
+    for (let i = 0; i < numberOfItems.length; i += 1 ) {
+      // Achando o indice dele na lista
+      newCart.push(quantityKeysArray.findIndex((e) => e === item));
+      // Excluindo do array
+      localStorageCart.splice(newCart[0], 1);
+    }
+
+    // Se quiser excluir uma quantidade de cada vez,
+    // comente o laço for e descomente as linhas abaixo
+    // Achando o indice dele na lista
+    // newCart.push(quantityKeysArray.findIndex((e) => e === item));
+    // Excluindo do array
+    // localStorageCart.splice(newCart[0], 1);
+
+    // Sobreescreva o localStorage como novo conteudo de cart
+    localStorage.setItem('cart', JSON.stringify(localStorageCart));
+    // Atualize o estado
+    setLocalStorageActualized(true);
   };
 
   return (
@@ -120,7 +170,10 @@ const Checkout = () => {
                 data-testid={`${i}-product-total-value`}
               >
                 R${' '}{(e.quantity * e.price).toFixed(2).toLocaleString()}{' '}</span>
-              <button data-testid={`${i}-removal-button`}>X</button>
+              <button
+                data-testid={`${i}-removal-button`}
+                onClick={() => removeItem(e.name)}
+              >X</button>
           </p>)
         }
       </div>
@@ -144,11 +197,13 @@ const Checkout = () => {
             onChange={(e) => setDeliveryNumber(e.target.value)}
           /><br />
           <button
-            type="button" data-testid="checkout-finish-btn" disabled={!localStorageCart.length}
+            type="button" data-testid="checkout-finish-btn"
+            disabled={!localStorageCart.length || (message === 'Compra realizada com sucesso!')}
             onClick={() => sendOrder()}
           >Finalizar Pedido
           </button><br />
         </fieldset>
+        <div><h3 style={{color: '#ff0000'}}>{message}</h3></div>
       </div>
     </div>
   );
