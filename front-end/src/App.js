@@ -20,6 +20,8 @@ function App() {
         <Route path="/profile" component={ Profile } />
         <Route path="/products" component={ Products } />
         <Route path="/register" component={ UserRegisterPage } />
+        <Route path="/orders" component={ Products } />
+        {/* fake ^^ */}
         <Route path="/" component={ Home } />
       </Switch>
     </BrowserRouter>

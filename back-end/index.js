@@ -19,7 +19,6 @@ app.use('/profile', profile);
 app.use('/register', userRegister);
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
-
 app.get('/products', products);
 
 const PORT = process.env.PORT || 3001;

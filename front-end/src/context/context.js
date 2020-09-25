@@ -16,7 +16,7 @@ const BeerProvider = ({ children }) => {
   };
 
   return (
-    <BeerContext.Provider value={context}>
+    <BeerContext.Provider value={ context }>
       {children}
     </BeerContext.Provider>
   );
