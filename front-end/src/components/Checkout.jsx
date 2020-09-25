@@ -24,7 +24,7 @@ const createOrderAPI = async ({
 // Se o localStorage existe
 const localStorageCart = [];
 const cart = localStorage.getItem('cart');
-if (cart !== '[]') {
+if (cart && cart !== '[]') {
   console.log(cart);
   localStorageCart.push(...JSON.parse(cart));
   console.log(localStorageCart); 
