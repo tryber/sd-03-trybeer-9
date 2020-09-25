@@ -186,12 +186,12 @@ const Checkout = () => {
       <div>
         <fieldset>
           <legend>Endereço para entrega</legend>
-          <label htmlFor="delivery_address">Rua</label>
+          <label htmlFor="delivery_address">Rua{' '}</label>
           <input
             type="text" name="delivery_address" data-testid="checkout-street-input"
             onChange={(e) => setDeliveryAddress(e.target.value)}
           /><br />
-          <label htmlFor="delivery_number">Número da casa</label>
+          <label htmlFor="delivery_number">Número da casa{' '}</label>
           <input
             type="text" name="delivery_number" data-testid="checkout-house-number-input"
             onChange={(e) => setDeliveryNumber(e.target.value)}
