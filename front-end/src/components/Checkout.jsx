@@ -25,17 +25,15 @@ const createOrderAPI = async ({
 const localStorageCart = [];
 const cart = localStorage.getItem('cart');
 if (cart && cart !== '[]') {
-  console.log(cart);
-  localStorageCart.push(...JSON.parse(cart));
-  console.log(localStorageCart); 
+  localStorageCart.push(...JSON.parse(cart)); 
 } else {
   // Testes
   // localStorageCart.push(
-  //   {'Skol Lata 250ml': 2.20},
-  //   {'Heineken 600ml': 7.50},
-  //   {'Antarctica Pilsen 300ml': 2.49},
-  //   {'Brahma 600ml': 7.50},
-  //   {'Skol Lata 250ml': 2.20},
+  //   { name:'Skol Lata 250ml', price: 2.20 },
+  //   { name:'Heineken 600ml', price: 7.50 },
+  //   { name: 'Antarctica Pilsen 300ml', price: 2.49 },
+  //   { name: 'Brahma 600ml', price: 7.50 },
+  //   { name: 'Skol Lata 250ml', price: 2.20 },
   // );
 }
 
@@ -54,15 +52,14 @@ const Checkout = () => {
   });
 
   // Criando um array com os nomes das keys das chaves
-  const quantityArray = localStorageCart.map((e) => Object.keys(e));
-  const quantityKeysArray = quantityArray.map((e) => e[0]);
-
+  const quantityKeysArray = localStorageCart.map((e) => e.name);
   // Contanto quantas vezes cada nome se repete
   // Ref. https://stackoverflow.com/questions/34615493/count-duplicates-in-an-array
   const counts = {};
   quantityKeysArray.forEach(function(x) {
     counts[x] = (counts[x] || 0) + 1;
   });
+
   // Criando um arrays final para fazer uma listagem dos produtos com quantidade e preço
   const listCart = [];
   const keys = Object.keys(counts);
@@ -73,7 +70,7 @@ const Checkout = () => {
       {
         quantity:values[i],
         name:keys[i],
-        price: localStorageCart[i][`${keys[i]}`],
+        price: localStorageCart[i]['price'],
       })
   }
 
