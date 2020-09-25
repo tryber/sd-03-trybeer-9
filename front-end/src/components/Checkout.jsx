@@ -21,24 +21,7 @@ const createOrderAPI = async ({
     .catch((error) => error);
 };
 
-// Se o localStorage existe
-const localStorageCart = [];
-const cart = localStorage.getItem('cart');
-if (cart && cart !== '[]') {
-  localStorageCart.push(...JSON.parse(cart)); 
-} else {
-  // Testes
-  // localStorageCart.push(
-  //   { name:'Skol Lata 250ml', price: 2.20 },
-  //   { name:'Heineken 600ml', price: 7.50 },
-  //   { name: 'Antarctica Pilsen 300ml', price: 2.49 },
-  //   { name: 'Brahma 600ml', price: 7.50 },
-  //   { name: 'Skol Lata 250ml', price: 2.20 },
-  // );
-}
-
-// Se o localStorage não existe
-// const localStorageCart = [];
+let localStorageCart = [];
 
 const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState();
@@ -49,6 +32,26 @@ const Checkout = () => {
   useEffect(() => {
     // Inicializacao do sensor de mudança do localStorage
     setLocalStorageActualized(() => false);
+  });
+
+  useEffect(() => {
+    // Se o localStorage existe
+    const cart = localStorage.getItem('cart');
+    if (cart && cart !== '[]') {
+      localStorageCart = [...JSON.parse(cart)]; 
+    } else {
+      // Testes
+      // localStorageCart = [
+      //   { name:'Skol Lata 250ml', price: 2.20 },
+      //   { name:'Heineken 600ml', price: 7.50 },
+      //   { name: 'Antarctica Pilsen 300ml', price: 2.49 },
+      //   { name: 'Brahma 600ml', price: 7.50 },
+      //   { name: 'Skol Lata 250ml', price: 2.20 },
+      // ];
+  }
+
+// Se o localStorage não existe
+// const localStorageCart = [];
   });
 
   // Criando um array com os nomes das keys das chaves
@@ -75,8 +78,9 @@ const Checkout = () => {
   }
 
   // Calcula o valor total do pedido
-  let totalPrice = listCart.reduce(((accum, { price }) =>
-    accum + price), 0);
+  let totalPrice = listCart.reduce(((accum, { quantity, price }) =>
+    accum + quantity * price), 0);
+    console.log('Carrinho: ',listCart);
 
   // O quê será exibido
   let showDisplay = false;

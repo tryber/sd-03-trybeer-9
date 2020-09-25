@@ -22,10 +22,9 @@ function CheckoutPage() {
       },
     })
       .catch(() => { setRedirectToLogin(true); });
-    setTitle('Meu perfil');
   }, [token]);
 
-  if (redirectToLogin) return (<Redirect to="/login" />);
+  // if (redirectToLogin) return (<Redirect to="/login" />);
 
   return (
     <div>
