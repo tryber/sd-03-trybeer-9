@@ -28,6 +28,60 @@ const removeToBascket = (cart, name, setCart) => {
   setCart(remove)
 }
 
+const renderProducts = (dataApi, cart, setCart) =>
+  dataApi.map(({ id, name, price, urlImage }, index) => {
+    return (
+      <div key={id} className="card-products">
+        <CardProducts
+          index={index}
+          name={name}
+          price={price}
+          urlImage={urlImage}
+          classImg="img-products"
+        />
+        <button type="button"
+          onClick={() => addTobascket(price, name, setCart)} data-testid={`${index}-product-plus`}>+</button>
+        <button type="button"
+          onClick={() => removeToBascket(cart, name, setCart)} data-testid={`${index}-product-minus`}>-</button>
+        <button type="button" data-testid={`${index}-product-qtd`} >{cart.length.toString()}</button>
+        {cart.length === 0
+          ? <button disabled type="button" data-testid="checkout-bottom-btn" >Ver Carrinho</button>
+          : <button data-testid="checkout-bottom-btn" ><Link to="/checkout" >Ver Carrinho</Link></button>}
+      </div>
+    )
+  });
+
+const reloadCart = (cart) => {
+  const total = cart.reduce((acc, actual) => acc + actual.price, 0);
+  const cartTotal = `R$ ${total.toFixed(2).toString().replace('.', ',')}`;
+  const getCart = JSON.parse(localStorage.getItem('cart'));
+  console.log('get', getCart)
+  return cartTotal;
+}
+
+function Products() {
+  const [dataApi, setDataApi] = useState([])
+  const { cart, setCart } = useContext(BeerContext);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/products')
+      .then(({ data }) => setDataApi(data))
+  }, []);
+
+  // const reload = .length;
+
+  return (
+    <>
+      {false && <Redirect to="/login" />}
+      <MenuTop />
+      <div className="render-cards">
+        {renderProducts(dataApi, cart, setCart)}
+        <p data-testid="checkout-bottom-btn-value">{reloadCart(cart)}</p>
+      </div>
+    </>
+  );
+}
+
 // const cardProducts = (id, name, price, photo, setCart, cart, total, i) => (
 //   <div
 //     data-testid={`${i}-product-price`}
@@ -48,56 +102,6 @@ const removeToBascket = (cart, name, setCart) => {
 //     </div>
 //   </div>
 // );
-
-const renderProducts = (dataApi, cart, setCart) =>
-  dataApi.map(({ id, name, price, urlImage }, index) => {
-    
-    return (
-      <div className="card-products">
-        <CardProducts
-          index={index}
-          key={id}
-          name={name}
-          price={price}
-          urlImage={urlImage}
-          classImg="img-products"
-        />
-        <button type="button"
-          onClick={() => addTobascket(price, name, setCart)} data-testid={`${index}-product-plus`}>+</button>
-        <button type="button"
-          onClick={() => removeToBascket(cart, name, setCart)} data-testid={`${index}-product-minus`}>-</button>
-        <button data-testid={`${index}-product-qtd`} >qtd: {cart.length}</button>
-        {cart.length === 0
-          ? <button disabled type="button" data-testid="checkout-bottom-btn" >Ver Carrinho</button>
-          : <Link to="/checkout" data-testid="checkout-bottom-btn" >Ver Carrinho</Link>}
-      </div>
-    )
-  });
-
-function Products() {
-  const [dataApi, setDataApi] = useState([])
-  const { cart, setCart } = useContext(BeerContext);
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/products')
-      .then(({ data }) => setDataApi(data))
-  }, []);
-
-  // const reload = JSON.parse(localStorage.getItem('cart')).length;
-
-  const total = cart.reduce((acc, actual) => acc + actual.price, 0)
-  return (
-    <>
-      {false && <Redirect to="/login" />}
-      <MenuTop />
-      <div className="render-cards">
-        {renderProducts(dataApi, cart, setCart)}
-        <p data-testid="checkout-bottom-btn-value">{`R$ ${total.toFixed(2)}`} </p>
-      </div>
-    </>
-  );
-}
-
 {/* <p data-testid={`${0}-product-qtd`}> total: {reload}</p> */ }
 {/* {dataApi.map(({ id, name, price, urlImage }, i) => cardProducts(id, name, price, urlImage, setCart, cart, total, i))} */ }
 

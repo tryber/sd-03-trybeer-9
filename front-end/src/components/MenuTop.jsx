@@ -21,7 +21,7 @@ function MenuTop() {
       data-testid="top-hamburguer"
       className="menu-btn"
       type="button"
-      onClick={ () => setOpen(true) }
+      onClick={() => setOpen(true)}
     >
       <div className="menu-toggle" />
       <div className="menu-toggle" />
@@ -34,9 +34,9 @@ function MenuTop() {
       data-testid="top-hamburguer"
       className="menu-btn"
       type="button" onClick={() => setOpen(false)}>
-      <div className="menu-toggle"></div>
-      <div className="menu-toggle" ></div>
-      <div className="menu-toggle" ></div>
+      <div className="menu-toggle" />
+      <div className="menu-toggle" />
+      <div className="menu-toggle" />
       <div className="render-aside">
         {showAside()}
       </div>
@@ -44,7 +44,7 @@ function MenuTop() {
   );
 
   return (
-    <header className="header">
+    <header className="header" >
       {setTitle('TryBeer')}
       {open ? menuToggle() : asideLinks()}
       <h1 className="top-title" data-testid="top-title">{title}</h1>
