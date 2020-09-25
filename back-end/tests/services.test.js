@@ -21,7 +21,7 @@ describe('testing de login service', () => {
     expect(await login.validateLogin('fabiano@gmail.com', '124')).toEqual({ code: 400, message: 'Senha no formato incorreto' });
   });
   test('user not found', async () => {
-    loginModel.getUserInfo = jest.fn().mockReturnValue(undefined);
+    loginModel.getUserInfo = jest.fn().mockReturnValue({ id: undefined });
     expect(await login.validateLogin('fabiano@gmail.com', '124234')).toEqual({ code: 404, message: 'usuário não encontrado' });
   });
   test('wrong password', async () => {
