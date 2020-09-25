@@ -37,7 +37,7 @@ function MenuTop() {
       <div className="menu-toggle" />
       <div className="menu-toggle" />
       <div className="menu-toggle" />
-      <div className=".side-menu-container">
+      <div className="side-menu-container">
         {showAside()}
       </div>
     </button>
