@@ -5,11 +5,13 @@ import MenuTop from '../components/MenuTop';
 import { BeerContext } from '../context/context';
 import Checkout from '../components/Checkout.jsx';
 
-const { token } = JSON.parse(localStorage.getItem('user')) || [];
+let validate;
 
 function CheckoutPage() {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [receivedData, setReceivedData] = useState();
   const { setTitle } = useContext(BeerContext);
+  const { token } = JSON.parse(localStorage.getItem('user')) || [];
   
   useEffect(() => {
     setTitle('Finalizar Pedido');
@@ -21,13 +23,21 @@ function CheckoutPage() {
         Authorization: token,
       },
     })
-      .catch(() => { setRedirectToLogin(true); });
-  }, [token]);
-
-  // if (redirectToLogin) return (<Redirect to="/login" />);
+    .then((response) => {
+      validate = response;
+      if (validate) setReceivedData(true);
+    })
+    .catch((error) => {
+        validate = error
+        if (validate) setRedirectToLogin(true);
+    });
+  });
 
   return (
     <div>
+      {
+        redirectToLogin && <Redirect to="/login" />
+      }
       <MenuTop />
       <Checkout />
     </div>

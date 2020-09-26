@@ -213,7 +213,12 @@ const Checkout = () => {
           /><br />
           <button
             type="button" data-testid="checkout-finish-btn"
-            disabled={!localStorageCart.length || (message === 'Compra realizada com sucesso!')}
+            disabled={
+              !localStorageCart.length ||
+              (message === 'Compra realizada com sucesso!') ||
+              !deliveryAddress ||
+              !deliveryNumber
+            }
             onClick={() => sendOrder()}
           >Finalizar Pedido
           </button><br />
