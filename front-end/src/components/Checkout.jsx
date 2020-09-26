@@ -81,7 +81,6 @@ const Checkout = () => {
   // Calcula o valor total do pedido
   let totalPrice = listCart.reduce(((accum, { quantity, price }) =>
     accum + quantity * price), 0);
-    console.log('Carrinho: ',listCart);
 
   // O quê será exibido
   let showDisplay = false;
@@ -144,9 +143,13 @@ const Checkout = () => {
 
   if (message === 'Compra realizada com sucesso!') {
     setTimeout(() => {
-      return (<Redirect to="/products" />);
+      setMessage('Redirecionando');
     }, 2000);
   }
+  if (message === 'Redirecionando') {
+    return (<Redirect to="/products" />);
+  }
+
   return (
     <div><h2>Produtos</h2>
       <br />
