@@ -5,10 +5,10 @@ import './style/MenuTop.css';
 
 function MenuTop() {
   const [open, setOpen] = useState(false);
-  const { title, setTitle } = useContext(BeerContext);
+  const { title } = useContext(BeerContext);
 
   const showAside = () => (
-    <div  className="showAside">
+    <div className="showAside">
       <Link className="link-aside" data-testid="side-menu-item-products" to="/products">Produtos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-profile" to="/profile">Meu Perfil</Link>
@@ -37,15 +37,14 @@ function MenuTop() {
       <div className="menu-toggle" />
       <div className="menu-toggle" />
       <div className="menu-toggle" />
-      <div className=".side-menu-container">
+      <div className="side-menu-container">
         {showAside()}
       </div>
     </button>
   );
 
   return (
-    <header className="header" >
-      {setTitle('TryBeer')}
+    <header className="header">
       {open ? menuToggle() : asideLinks()}
       <h1 className="top-title" data-testid="top-title">{title}</h1>
     </header>
