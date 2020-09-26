@@ -19,7 +19,7 @@ require('dotenv').config();
 const  my = require('mysql2');
 
 function queryTestDb(query, config) {
-  const connection = my.createConnection({host: 'localhost', user: 'root', password: 'W.igor7788'})
+  const connection = my.createConnection({host: 'localhost', user: 'root', password: 'root'})
   connection.connect()
   return new Promise((resolve, reject) => {
     connection.query(query, (error, results) => {

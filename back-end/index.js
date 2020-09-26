@@ -7,11 +7,8 @@ const cors = require('cors');
 const login = require('./controllers/login');
 const profile = require('./controllers/profile');
 const userRegister = require('./controllers/userRegister');
-<<<<<<< HEAD
 const products = require('./controllers/products');
-=======
 const productList = require('./controllers/productList');
->>>>>>> orders-menu
 
 const app = express();
 app.use(cors(), bodyParser.json());
