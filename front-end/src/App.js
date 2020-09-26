@@ -10,19 +10,19 @@ import Profile from './components/Profile';
 import Home from './components/Home';
 import Products from './components/Products';
 import UserRegisterPage from './pages/User-Register';
+import Orders from './components/Orders';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/admin/orders" />
-        <Route path="/login" component={ Login } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/products" component={ Products } />
-        <Route path="/register" component={ UserRegisterPage } />
-        <Route path="/orders" component={ Products } />
-        <Route path="/checkout" component={ Products } />
-        <Route path="/" component={ Home } />
+        <Route exact path="/admin/orders" />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/register" component={ UserRegisterPage } />
+        <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
   );
