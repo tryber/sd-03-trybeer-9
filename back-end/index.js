@@ -9,12 +9,14 @@ const profile = require('./controllers/profile');
 const userRegister = require('./controllers/userRegister');
 const products = require('./controllers/products');
 const productList = require('./controllers/productList');
+const checkout = require('./controllers/checkout');
 
 const app = express();
 app.use(cors(), bodyParser.json());
 
 app.use('/', bodyParser.json());
 
+app.use('/checkout', checkout);
 app.use('/login', login);
 app.use('/profile', profile);
 app.use('/register', userRegister);
