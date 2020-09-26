@@ -44,7 +44,7 @@ function MenuTop() {
   );
 
   return (
-    <header className="header">
+    <header className="header" >
       {open ? menuToggle() : asideLinks()}
       <h1 className="top-title" data-testid="top-title">{title}</h1>
     </header>
