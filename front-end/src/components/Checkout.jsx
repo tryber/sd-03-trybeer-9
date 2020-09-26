@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import SaleOrderAPI from '../services/SaleOrderService';
 
 const createOrderAPI = async ({
@@ -22,7 +23,7 @@ const createOrderAPI = async ({
 };
 
 let localStorageCart = [];
-
+// let total = 0;
 const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [deliveryNumber, setDeliveryNumber] = useState();
@@ -141,6 +142,11 @@ const Checkout = () => {
     setLocalStorageActualized(true);
   };
 
+  if (message === 'Compra realizada com sucesso!') {
+    setTimeout(() => {
+      return (<Redirect to="/products" />);
+    }, 2000);
+  }
   return (
     <div><h2>Produtos</h2>
       <br />
@@ -164,16 +170,17 @@ const Checkout = () => {
           listCart.map((e, i) =>
            <p key={e.name}>
               {/*Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString*/}
-              <span data-testid={`${i}-product-qtd-input`}>{e.quantity}{' '}</span>
-              <span data-testid={`${i}-product-name`}>{e.name}{' '}</span>              
+              <span data-testid={`${i}-product-qtd-input`}>{e.quantity}</span>{' '}
+              <span data-testid={`${i}-product-name`}>{e.name}</span>{' '}
               <span
                 data-testid={`${i}-product-unit-price`}
               >
-                R${' '}{e.price.toFixed(2).toLocaleString()}{' '}</span>
+              {`(R$ ${e.price.toFixed(2).replace('.',',')} un)`}
+              </span>{' '}
               <span
                 data-testid={`${i}-product-total-value`}
               >
-                R${' '}{(e.quantity * e.price).toFixed(2).toLocaleString()}{' '}</span>
+                {`R$ ${(e.quantity * e.price).toFixed(2).replace('.',',')}`}</span>{' '}
               <button
                 data-testid={`${i}-removal-button`}
                 onClick={() => removeItem(e.name)}
@@ -182,9 +189,10 @@ const Checkout = () => {
         }
       </div>
       <div>
+        <span>Total:{' '}</span>
         <span data-testid="order-total-value">
-          Total:{' '}{
-          totalPrice.toFixed(2)}
+          R${' '}{
+          totalPrice.toFixed(2).replace('.',',')}
         </span>
       </div>
       <div>
