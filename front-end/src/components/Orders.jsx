@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { BeerContext } from '../context/context';
 import MenuTop from './MenuTop';
 import './CSS/Orders.css';
@@ -11,9 +11,9 @@ const getDate = (date) => {
   const minimum = 10;
   const fullDate = new Date(date).toISOString();
   const isoDate = new Date(fullDate);
-  let month = isoDate.getMonth();
+  let month = isoDate.getMonth() + 1;
   if (month < minimum) { month = `0${month}`; }
-  let day = isoDate.getDay();
+  let day = isoDate.getDate();
   if (day < minimum) { day = `0${day}`; }
   return `${day}/${month}`;
 };
@@ -40,11 +40,14 @@ function Orders() {
       {redirectToLogin && <Redirect to="/login" />}
       <div className="purchases-container">
         {purchasedProducts.map(({ saleDate, totalPrice, id }, index) => (
-          <div key={ id } className="purchases-card" data-testid={ `${index}-order-card-container` }>
-            <p data-testid={ `${index}-order-number` }>{`Pedido ${id}`}</p>
-            <p data-testid={ `${index}-order-total-value` }>{`R$ ${Number(totalPrice).toFixed(decimalNumbers)}`}</p>
-            <p data-testid={ `${index}-order-date` }>{`${getDate(saleDate)}`}</p>
-          </div>))}
+          <Link key={ id } to={ `/orders/${id}` }>
+            <div className="purchases-card" data-testid={ `${index}-order-card-container` }>
+              <p data-testid={ `${index}-order-number` }>{`Pedido ${id}`}</p>
+              <p data-testid={ `${index}-order-total-value` }>{`R$ ${Number(totalPrice).toFixed(decimalNumbers).replace('.', ',')}`}</p>
+              <p data-testid={ `${index}-order-date` }>{`${getDate(saleDate)}`}</p>
+            </div>
+          </Link>))}
+
       </div>
     </div>
   );
