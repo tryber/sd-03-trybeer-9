@@ -18,8 +18,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/admin/orders" component={ AdminOrders }/>
-        <Route path="/admin/profile" component={ AdminProfile }/>
+        <Route path="/admin/orders" component={ AdminOrders } />
+        <Route path="/admin/profile" component={ AdminProfile } />
         <Route path="/checkout" component={ Checkout } />
         <Route path="/login" component={ Login } />
         <Route path="/profile" component={ Profile } />
