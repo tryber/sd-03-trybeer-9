@@ -63,7 +63,8 @@ const renderProducts = (dataApi, cart, setCart) =>
             onClick={() => addTobascket(price, name, setCart)} data-testid={`${index}-product-plus`}>+</button>
           <button type="button"
             onClick={() => removeToBascket(cart, name, setCart)} data-testid={`${index}-product-minus`}>-</button>
-          <button type="button" data-testid={`${index}-product-qtd`} >{cart.length.toString()}</button>
+        <p type="button" data-testid={`${index}-product-qtd`}>{cart.filter((e) => e.name === name).length}</p>
+
         </div>
       </>
     )
