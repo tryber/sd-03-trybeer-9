@@ -24,14 +24,45 @@ const addTobascket = (price, name, setCart) => {
   }
 }
 
-const removeToBascket = (cart, name, setCart) => {
-  if (cart.length === 0) return;
-  const remove = cart.filter(e => e.name !== name);
-  localStorage.setItem('cart', JSON.stringify(remove))
-  setCart(remove);
+// will
+// const removeToBascket = (cart, name, setCart) => {
+//   if (cart.length === 0) return;
+//   const remove = cart.filter(e => e.name !== name);
+//   localStorage.setItem('cart', JSON.stringify(remove))
+//   setCart(remove);
+// }
+
+//Fabi
+//const removeToBascket = (cart, name, setCart) => {
+//   if (cart.length === 0) return;
+//   const remove = cart.reduce((acc, e) => {
+//     if (e.name === name) {
+//       if (acc.counter > 0) {
+//         acc.arr = [...acc.arr, e];
+//         return acc;
+//       }
+//       acc.counter = 1;
+//       return acc;
+//     }
+//     acc.arr = [...acc.arr, e];
+//     return acc;
+//   }, { arr: [], counter: 0 });
+//   localStorage.setItem('cart', JSON.stringify(remove.arr));
+//   setCart(remove.arr);
+// };
+
+// marco
+const removeToBascket = (newCart, name, setCart) => {
+  if (newCart.length === 0) return;
+  const removeIndex = newCart.findIndex(e => e.name === name);
+  if (removeIndex >= 0) {
+    newCart.splice(removeIndex, 1);
+    localStorage.setItem('cart', JSON.stringify(newCart))
+    setCart(newCart);
+  }
 }
 
-const renderProducts = (dataApi, cart, setCart) =>
+const renderProducts = (dataApi, cart, setCart, newCart) =>
   dataApi.map(({ id, name, price, urlImage }, index) => {
     return (
       <>
@@ -46,8 +77,8 @@ const renderProducts = (dataApi, cart, setCart) =>
           <button type="button"
             onClick={() => addTobascket(price, name, setCart)} data-testid={`${index}-product-plus`}>+</button>
           <button type="button"
-            onClick={() => removeToBascket(cart, name, setCart)} data-testid={`${index}-product-minus`}>-</button>
-          <button type="button" data-testid={`${index}-product-qtd`} >{cart.length.toString()}</button>
+            onClick={() => removeToBascket(newCart, name, setCart)} data-testid={`${index}-product-minus`}>-</button>
+          <p type="button" data-testid={`${index}-product-qtd`}>{cart ? cart.filter((e) => e.name === name).length : 0}</p>
         </div>
       </>
     )
@@ -72,15 +103,15 @@ function Products() {
       .then(({ data }) => setDataApi(data))
   }, [token]);
 
-  const sumLocalStorage = localStorage.getItem('cart');
+  const newCart = JSON.parse(localStorage.getItem('cart'));
 
   return (
     <>
       {redirectLogin && <Redirect to="/login" />}
       <MenuTop />
       <div className="render-cards">
-        {renderProducts(dataApi, cart, setCart)}
-        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(JSON.parse(sumLocalStorage)).toFixed(2).toLocaleString().replace('.', ',')}`}</p>
+        {renderProducts(dataApi, cart, setCart, newCart)}
+        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).toLocaleString().replace('.', ',')}`}</p>
       </div>
       {cart.length === 0
         ? <button disabled type="button" data-testid="checkout-bottom-btn" >Ver Carrinho</button>
