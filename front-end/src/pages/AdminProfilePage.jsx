@@ -7,5 +7,5 @@ function AdminProfilePage () {
     <AdminSideBar Children={<AdminProfile />}/>
   );
 }
-
+//.
 export default AdminProfilePage;
