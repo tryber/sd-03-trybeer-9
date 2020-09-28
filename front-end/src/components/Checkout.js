@@ -9,6 +9,8 @@ const createOrderAPI = async ({
       deliveryNumber,
       saleDate,
       status,
+      store,
+
 }) => {
   return await SaleOrderAPI(
     userId,
@@ -17,6 +19,7 @@ const createOrderAPI = async ({
     deliveryNumber,
     saleDate,
     status,
+    store,
   )
     .then((data) =>  data)
     .catch((error) => error);
@@ -77,14 +80,14 @@ const Checkout = () => {
         price: localStorageCart[i]['price'],
       })
   }
-
   // Calcula o valor total do pedido
   let totalPrice = listCart.reduce(((accum, { quantity, price }) =>
-    accum + quantity * price), 0);
-
+  accum + quantity * price), 0);
+  
   // O quê será exibido
   let showDisplay = false;
   if (localStorageCart.length) showDisplay = true;
+
 
   // Funcao para enviar pedido
   const sendOrder = async () => {
@@ -93,9 +96,12 @@ const Checkout = () => {
     if (!deliveryAddress || !deliveryNumber) {
       return setMessage('Todos os campos devem ser preenchidos!');
     }
+    const store = JSON.parse(localStorage.getItem('cart'));
+
     const orderJson = 
     {
       userId: 2,
+      store,
       totalPrice,
       deliveryAddress,
       deliveryNumber,

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import MenuTop from '../components/MenuTop';
 import { BeerContext } from '../context/context';
-import Checkout from '../components/Checkout.jsx';
+import Checkout from '../components/Checkout';
 
 let validate;
 

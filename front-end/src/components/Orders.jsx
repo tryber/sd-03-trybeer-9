@@ -19,7 +19,7 @@ const getDate = (date) => {
 };
 
 function Orders() {
-  const { setTitle } = useContext(BeerContext);
+  const { setTitle, setOrderNumber, setOrderInfo } = useContext(BeerContext);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
   const [purchasedProducts, setPurchasedProducts] = useState([]);
   const { token } = JSON.parse(localStorage.getItem('user')) || [];
@@ -40,14 +40,13 @@ function Orders() {
       {redirectToLogin && <Redirect to="/login" />}
       <div className="purchases-container">
         {purchasedProducts.map(({ saleDate, totalPrice, id }, index) => (
-          <Link key={ id } to={ `/orders/${id}` }>
+          <Link key={ id } onClick={ () => { setOrderNumber(id); setOrderInfo({ date: getDate(saleDate), total: totalPrice }); } } to={ `/orders/${id}` }>
             <div className="purchases-card" data-testid={ `${index}-order-card-container` }>
               <p data-testid={ `${index}-order-number` }>{`Pedido ${id}`}</p>
               <p data-testid={ `${index}-order-total-value` }>{`R$ ${Number(totalPrice).toFixed(decimalNumbers).replace('.', ',')}`}</p>
               <p data-testid={ `${index}-order-date` }>{`${getDate(saleDate)}`}</p>
             </div>
           </Link>))}
-
       </div>
     </div>
   );

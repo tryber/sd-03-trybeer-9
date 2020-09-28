@@ -6,13 +6,18 @@ export const BeerContext = createContext();
 const BeerProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [title, setTitle] = useState('');
+  const [orderNumber, setOrderNumber] = useState(null);
+  const [orderInfo, setOrderInfo] = useState({});
 
   const context = {
     cart,
     setCart,
     title,
     setTitle,
-    teste: 2,
+    orderNumber,
+    setOrderNumber,
+    orderInfo,
+    setOrderInfo,
   };
 
   return (

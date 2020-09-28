@@ -12,6 +12,7 @@ import Products from './components/Products';
 import UserRegisterPage from './pages/User-Register';
 import Orders from './components/Orders';
 import Checkout from './pages/CheckoutPage';
+import OrderDetails from './components/OrderDetails';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/products" component={ Products } />
         <Route exact path="/register" component={ UserRegisterPage } />
         <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/orders/:id" component={ OrderDetails } />
         <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>

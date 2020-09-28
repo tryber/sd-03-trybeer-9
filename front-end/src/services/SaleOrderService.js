@@ -11,6 +11,7 @@ const SaleOrderAPI = (
   deliveryNumber,
   saleDate,
   status,
+  store,
 ) => axios.post('http://localhost:3001/checkout',
   {
     userId,
@@ -19,6 +20,7 @@ const SaleOrderAPI = (
     deliveryNumber,
     saleDate,
     status,
+    store,
   },
   headers)
   .then((res) => res)
