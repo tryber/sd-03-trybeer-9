@@ -29,7 +29,23 @@ const removeToBascket = (cart, name, setCart) => {
   const remove = cart.filter(e => e.name !== name);
   localStorage.setItem('cart', JSON.stringify(remove))
   setCart(remove);
-}
+}const removeToBascket = (cart, name, setCart) => {
+  if (cart.length === 0) return;
+  const remove = cart.reduce((acc, e) => {
+    if (e.name === name) {
+      if (acc.counter > 0) {
+        acc.arr = [...acc.arr, e];
+        return acc;
+      }
+      acc.counter = 1;
+      return acc;
+    }
+    acc.arr = [...acc.arr, e];
+    return acc;
+  }, { arr: [], counter: 0 });
+  localStorage.setItem('cart', JSON.stringify(remove.arr));
+  setCart(remove.arr);
+};
 
 const renderProducts = (dataApi, cart, setCart) =>
   dataApi.map(({ id, name, price, urlImage }, index) => {
