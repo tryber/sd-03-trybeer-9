@@ -8,6 +8,7 @@ const login = require('./controllers/login');
 const profile = require('./controllers/profile');
 const userRegister = require('./controllers/userRegister');
 const products = require('./controllers/products');
+const productList = require('./controllers/productList');
 const checkout = require('./controllers/checkout');
 
 const app = express();
@@ -19,6 +20,7 @@ app.use('/checkout', checkout);
 app.use('/login', login);
 app.use('/profile', profile);
 app.use('/register', userRegister);
+app.use('/productList', productList);
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
 app.get('/products', products);

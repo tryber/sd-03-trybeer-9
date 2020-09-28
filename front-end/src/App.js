@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Home from './components/Home';
 import Products from './components/Products';
 import UserRegisterPage from './pages/User-Register';
+import Orders from './components/Orders';
 import Checkout from './pages/CheckoutPage';
 import AdminOrders from './pages/AdminOrders';
 import AdminProfile from './pages/AdminProfile';
@@ -21,13 +22,12 @@ function App() {
         <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/admin/profile" component={ AdminProfile } />
         <Route path="/checkout" component={ Checkout } />
-        <Route path="/login" component={ Login } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/products" component={ Products } />
-        <Route path="/register" component={ UserRegisterPage } />
-        <Route path="/orders" component={ Products } />
-        <Route path="/checkout" component={ Products } />
-        <Route path="/" component={ Home } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/register" component={ UserRegisterPage } />
+        <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
   );
