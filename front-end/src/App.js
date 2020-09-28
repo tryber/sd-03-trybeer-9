@@ -11,12 +11,15 @@ import Home from './components/Home';
 import Products from './components/Products';
 import UserRegisterPage from './pages/User-Register';
 import Checkout from './pages/CheckoutPage';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfile from './pages/AdminProfile';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/admin/orders" />
+        <Route path="/admin/orders" component={ AdminOrders }/>
+        <Route path="/admin/profile" component={ AdminProfile }/>
         <Route path="/checkout" component={ Checkout } />
         <Route path="/login" component={ Login } />
         <Route path="/profile" component={ Profile } />

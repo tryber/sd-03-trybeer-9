@@ -1,12 +1,12 @@
 import React from 'react';
 import AdminSideBar from '../components/AdminSideBar';
 
-function AdminSideBarPage () {
+function AdminProfilePage () {
   return (
     <div>
-      <AdminSideBarPage />
+      <AdminSideBar />
     </div>
   );
 }
 
-export default AdminSideBarPage;
+export default AdminProfilePage;
