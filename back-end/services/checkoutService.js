@@ -19,11 +19,9 @@ const checkoutService = async (req, res) => {
   });
   const keys = Object.keys(obj);
   const values = Object.values(obj);
-  const finalStore = keys.map((e, i) => ({ [e]: values[i] }));
+  const finalStore = keys.map((e, i) => ({ name: e, quantity: values[i] }));
 
-  console.log(finalStore);
   // Salva no banco
-  const saveOrder = await saveOrderWithProductDetails(finalStore);
   const response = await createOrder(
     userId,
     totalPrice,
@@ -31,7 +29,8 @@ const checkoutService = async (req, res) => {
     deliveryNumber,
     saleDate,
     status,
-    );
+  );
+  await saveOrderWithProductDetails(finalStore);
   res.status(201).send(response);
 };
 

@@ -4,8 +4,10 @@ const saveOrderWithProductDetails = async (products) => {
   const saleInfo = await connection()
     .then((db) => db.getTable('sales')
       .select()
+      .orderBy('id DESC')
+      .limit(1)
       .execute())
-    .then((result) => result.fetchAll().pop() || []);
+    .then((result) => result.fetchOne() || []);
   const [saleId] = saleInfo;
 
   products.map(async ({ name, quantity }) => {
@@ -15,12 +17,13 @@ const saveOrderWithProductDetails = async (products) => {
         .where('name = :name')
         .bind('name', name)
         .execute())
-      .then((result) => result.fetchAll()[0] || []);
+      .then((result) => result.fetchOne() || []);
+
     const [id] = productInfo;
 
     await connection()
       .then((db) => db.getTable('sales_products')
-        .insert(['sales_id', 'product_id', 'quantity'])
+        .insert(['sale_id', 'product_id', 'quantity'])
         .values([saleId, id, quantity])
         .execute());
   });
