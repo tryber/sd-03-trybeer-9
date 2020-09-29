@@ -15,11 +15,13 @@ import Checkout from './pages/CheckoutPage';
 import OrderDetails from './components/OrderDetails';
 import AdminOrders from './pages/AdminOrders';
 import AdminProfilePage from './pages/AdminProfilePage';
+import AdminOrderDetailPage from './pages/AdminOrderDetailPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/admin/orders/:id" component={ AdminOrderDetailPage } />
         <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/checkout" component={ Checkout } />
         <Route exact path="/login" component={ Login } />

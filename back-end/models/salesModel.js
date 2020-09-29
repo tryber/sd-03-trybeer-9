@@ -36,9 +36,9 @@ const createOrder = async (
   }))
   .catch((error) => error);
 
-const getOrderById = async(id) => connection()
+const getDetailByOrderId = async (id) => connection()
   .then((db) => db.getTable('sales_products')
-    .select(['sale_id','product_id', 'quantity'])
+    .select(['sale_id', 'product_id', 'quantity'])
     .where('sale_id = :id')
     .bind('id', id)
     .execute())
@@ -46,7 +46,18 @@ const getOrderById = async(id) => connection()
   .then((data) => data.map(([saleId, productId, quantity]) => ({ saleId, productId, quantity })))
   .catch((error) => error);
 
-  module.exports = {
+const getStatusOrderById = async (id) => connection()
+  .then((db) => db.getTable('sales')
+    .select(['id', 'status'])
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .then((result) => result.fetchAll())
+  .then((data) => data.map(([_id, status]) => ({ status })))
+  .catch((error) => error);
+
+module.exports = {
   createOrder,
-  getOrderById,
+  getDetailByOrderId,
+  getStatusOrderById,
 };

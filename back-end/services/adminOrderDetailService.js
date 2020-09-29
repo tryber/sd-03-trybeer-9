@@ -1,20 +1,27 @@
-const { getOrderById } = require('../models/salesModel');
+const { getDetailByOrderId, getStatusOrderById } = require('../models/salesModel');
+const { getAllProducts } = require('../models/products');
 
 const adminOrderDetailService = async (req, res) => {
   const { id } = req.params;
-  const result =  await getOrderById(id);
+  const result = await getDetailByOrderId(id);
+
   if (result) {
-    res.status(200).send(result);
-  }
-  /*
-  if (result) {
-    // const orderDetail = getProductsById(result.productId); // Array de produtos
-    // crie um objeto resposta
-    // const response = [{ name: orderDetail.name[0], quantity: result.quantity[0], price: orderDetail.price[0] }];
-    const response = [{ name: 'Skol Lata 250ml', quantity: 1, price: 2.20 }];
-    res.status(200).send(response);
-  }*/ else {
-    res.status(404).send({ message: 'Order not found', code: 'not_found'});
+    const products = await getAllProducts();
+    const orderStatus = await getStatusOrderById(id);
+    let orderProducts = [];
+    result.map((e) => {
+      orderProducts = [
+        ...orderProducts,
+        Object.assign(
+          ...products.filter((p) => p.id === e.productId),
+          { quantity: e.quantity },
+        ),
+      ];
+      return orderProducts;
+    });
+    res.status(200).send({ orderProducts, orderStatus });
+  } else {
+    res.status(404).send({ message: 'Order not found', code: 'not_found' });
   }
 };
 
