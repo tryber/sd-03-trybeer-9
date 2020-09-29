@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import RegisterUserAPI from '../services/UserRegisterService';
 
-const createUserAPI = async (name, email, password, role) => {
-  return await RegisterUserAPI(name, email, password, role)
+const createUserAPI = async (name, email, password, role, street, number, city, district) => {
+  return await RegisterUserAPI(name, email, password, role, street, number, city, district)
     .then((data) =>  data)
     .catch((error) => error);
 };
@@ -19,6 +19,10 @@ const UserRegisterForm = () => {
   const [showButton, setShowButton] = useState(false);
   const [backendResponse, setBackendResponse] = useState('');
   const [redirectTo, setRedirectTo] = useState('');
+  const [street, setStreet] = useState('');
+  const [district, setDistrict] = useState('');
+  const [number, setNumber] = useState('');
+  const [city, setCity] = useState('');
   let role = 'client';
 
   useEffect(() => {
@@ -107,6 +111,18 @@ const UserRegisterForm = () => {
         onChange={(e) => setPassword(e.target.value)}
         required={true}
       /><span>{passwordWarning}</span><br/>
+      <label htmlFor="street">Rua
+      <input id="street" onChange={(e) => setStreet(e.target.value)} value={street}/>
+      </label>
+      <label htmlFor="number">Número
+      <input id="number" onChange={(e) => setNumber(e.target.value)} value={number}/>
+      </label>
+      <label htmlFor="district">Bairro 
+      <input id="district" onChange={(e) => setDistrict(e.target.value)} value={district}/>
+      </label>
+      <label htmlFor="city">Cidade
+      <input id="city" onChange={(e) => setCity(e.target.value)} value={city}/>
+      </label>
       <input
         data-testid="signup-seller" type="checkbox" name="vendor"
         checked={check} onChange={(e) => setCheck(e.target.checked)}
@@ -114,7 +130,7 @@ const UserRegisterForm = () => {
       <button
         data-testid="signup-btn" type="submit"
         onClick={ async () => {
-          const result = await createUserAPI(name, email, password, role);
+          const result = await createUserAPI(name, email, password, role, street, number, city, district);
           if (result) {
             if (result.message) {
               return setBackendResponse('E-mail already in database.');

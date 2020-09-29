@@ -77,8 +77,15 @@ const cartInStorage = (cart) => {
   return total;
 };
 
+const filterProduct = (product, dataApi, setDataApi, allProducts) => {
+  const filteredProducts = allProducts.filter(({ name }) => name.toLowerCase().includes(product.toLowerCase()));
+  setDataApi(filteredProducts);
+};
+
 function Products() {
   const [dataApi, setDataApi] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [searchedItem, setSearchedItem] = useState('');
   const { cart, setCart, setTitle } = useContext(BeerContext);
   const [redirectLogin, setRedirectLogin] = useState(false);
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
@@ -87,7 +94,7 @@ function Products() {
     setTitle('TryBeer');
     instance.get('/profile', { headers: { Authorization: token } }).catch(() => setRedirectLogin(true));
     instance.get('/products')
-      .then(({ data }) => setDataApi(data));
+      .then(({ data }) => { setDataApi(data); setAllProducts(data); });
   }, [token, setTitle]);
 
   const sumLocalStorage = localStorage.getItem('cart');
@@ -97,6 +104,10 @@ function Products() {
     <div>
       {redirectLogin && <Redirect to="/login" />}
       <MenuTop />
+      <div>
+        <p>Buscar Produto</p>
+        <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
+      </div>
       <div className="render-cards">
         {renderProducts(dataApi, newCart, setCart)}
         <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(JSON.parse(sumLocalStorage)).toFixed(2).toLocaleString().replace('.', ',')}`}</p>

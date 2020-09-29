@@ -33,7 +33,7 @@ const validateEntries = (name, email, password) => {
 };
 
 const userRegisterService = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, street, number, city, district } = req.body;
   // Validações
   const validate = validateEntries(name, email, password);
   if (validate.status !== 200) {
@@ -46,7 +46,7 @@ const userRegisterService = async (req, res) => {
       return res.status(403).send({ message: 'E-mail already in database.', code: 'invalid_data' });
     }
   }
-  const response = await createUser(name, email, password, role);
+  const response = await createUser(name, email, password, role, street, number, city, district);
   res.status(201).send(response);
 };
 

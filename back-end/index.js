@@ -11,6 +11,7 @@ const products = require('./controllers/products');
 const productList = require('./controllers/productList');
 const checkout = require('./controllers/checkout');
 const orderDetails = require('./controllers/orderDetails');
+const userInfo = require('./controllers/userInfo');
 
 const app = express();
 app.use(cors(), bodyParser.json());
@@ -19,6 +20,7 @@ app.use('/', bodyParser.json());
 
 app.use('/checkout', checkout);
 app.use('/login', login);
+app.use('/userInfo', userInfo);
 app.use('/profile', profile);
 app.use('/register', userRegister);
 app.use('/productList', productList);

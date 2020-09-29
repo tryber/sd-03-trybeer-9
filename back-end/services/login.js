@@ -25,7 +25,14 @@ const login = async ({ email, password }) => {
   return { name, email, token, role };
 };
 
+const collectInfo = async (email) => {
+  const { code, message, street, number, city, district } = await model.login.getUserInfo(email);
+  if (message) return { code, message };
+  return { street, number, city, district };
+};
+
 module.exports = {
   login,
   validateLogin,
+  collectInfo,
 };
