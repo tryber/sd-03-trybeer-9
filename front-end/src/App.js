@@ -13,12 +13,14 @@ import UserRegisterPage from './pages/User-Register';
 import Orders from './components/Orders';
 import Checkout from './pages/CheckoutPage';
 import OrderDetails from './components/OrderDetails';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfilePage from './pages/AdminProfilePage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/admin/orders" />
+        <Route path="/admin/orders" component={ AdminOrders } />
         <Route path="/checkout" component={ Checkout } />
         <Route exact path="/login" component={ Login } />
         <Route exact path="/profile" component={ Profile } />
@@ -26,6 +28,7 @@ function App() {
         <Route exact path="/register" component={ UserRegisterPage } />
         <Route exact path="/orders" component={ Orders } />
         <Route exact path="/orders/:id" component={ OrderDetails } />
+        <Route path="/admin/profile" component={ AdminProfilePage } />
         <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
