@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth');
 
 const profile = Router();
 
-profile.get('/', auth);
+profile.get('/', auth, async (req, res) => res.status(200).send('logado'));
 
 profile.post('/', async (req, res) => {
   const { body } = req;

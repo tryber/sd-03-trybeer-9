@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './style/MenuTop.css';
 import { BeerContext } from '../context/context';
+import './style/MenuTop.css';
 
 function MenuTop() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ function MenuTop() {
       data-testid="top-hamburguer"
       className="menu-btn"
       type="button"
-      onClick={ () => setOpen(true) }
+      onClick={() => setOpen(true)}
     >
       <div className="menu-toggle" />
       <div className="menu-toggle" />
@@ -33,20 +33,18 @@ function MenuTop() {
     <button
       data-testid="top-hamburguer"
       className="menu-btn"
-      type="button"
-      onClick={ () => setOpen(false) }
-    >
+      type="button" onClick={() => setOpen(false)}>
       <div className="menu-toggle" />
       <div className="menu-toggle" />
       <div className="menu-toggle" />
-      <div>
+      <div className="side-menu-container">
         {showAside()}
       </div>
     </button>
   );
 
   return (
-    <header className="header">
+    <header className="header" >
       {open ? menuToggle() : asideLinks()}
       <h1 className="top-title" data-testid="top-title">{title}</h1>
     </header>

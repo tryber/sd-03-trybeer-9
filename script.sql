@@ -59,3 +59,24 @@ INSERT INTO products (id, name, price, url_image) VALUES
 	('9','Becks 600ml',8.89, 'http://localhost:3001/images/Becks 600ml.jpg'),
 	('10','Skol Beats Senses 269ml',3.57, 'http://localhost:3001/images/Skol Beats Senses 269ml.jpg'),
 	('11','Stella Artois 275ml',3.49, 'http://localhost:3001/images/Stella Artois 275ml.jpg');
+
+
+-- USE Trybeer;
+
+-- INSERT INTO sales (user_id, total_price, delivery_address, delivery_number, sale_date, status) VALUES 
+--     (1, 20, 'rua bla bla', 72, '2020-09-22', 'Entregue'), 
+--     (1, 40, 'rua bla bla', 72, '2020-09-22', 'Pendente'), 
+--     (2, 30, 'rua bla bla', 70, '2020-09-22', 'Entregue'), 
+--     (2, 20, 'rua bla bla', 72, '2020-09-22', 'Pendente');
+
+-- INSERT INTO sales_products (sale_id, product_id, quantity) VALUES 
+--     (1, 1, 1), 
+--     (1, 5, 2), 
+--     (2, 6, 3),
+--     (2, 7, 1), 
+--     (2, 1, 4), 
+--     (3, 2, 5), 
+--     (3, 9, 2), 
+--     (4, 6, 3),
+--     (4, 5, 8),
+--     (4, 3, 4);
