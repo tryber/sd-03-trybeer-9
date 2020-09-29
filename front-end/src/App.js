@@ -10,20 +10,26 @@ import Profile from './components/Profile';
 import Home from './components/Home';
 import Products from './components/Products';
 import UserRegisterPage from './pages/User-Register';
-import AdminProfile from './components/AdminProfile';
-import FakeAdmin from './components/FakeAdmin';
+import Orders from './components/Orders';
+import Checkout from './pages/CheckoutPage';
+import OrderDetails from './components/OrderDetails';
+import AdminOrders from './pages/AdminOrders';
+import AdminProfilePage from './pages/AdminProfilePage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/admin/orders" component={ FakeAdmin } />
-        <Route path="/login" component={ Login } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/products" component={ Products } />
-        <Route path="/register" component={ UserRegisterPage } />
-        <Route path="/admin/profile" component={ AdminProfile } />
-        <Route path="/" component={ Home } />
+        <Route path="/admin/orders" component={ AdminOrders } />
+        <Route path="/checkout" component={ Checkout } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/register" component={ UserRegisterPage } />
+        <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/orders/:id" component={ OrderDetails } />
+        <Route path="/admin/profile" component={ AdminProfilePage } />
+        <Route exact path="/" component={ Home } />
       </Switch>
     </BrowserRouter>
   );

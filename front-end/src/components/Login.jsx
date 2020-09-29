@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './CSS/Login.css';
 
+// Avisar quando o banco não estiver ligado
+
 const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAdminHome) => {
   axios.post('http://localhost:3001/login', { password, email })
     .then(({
@@ -15,7 +17,7 @@ const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAd
       }));
       return (role === 'administrator') ? setRedirectToAdminHome(true) : setRedirectToHome(true);
     })
-    .catch((err) => setMessage(err.response.data.message));
+    .catch((err) => ((err.response) ? setMessage(err.response.data.message) : setMessage('Servidor desligado')));
 };
 
 const verifyInput = (email, password, setDisabled) => {

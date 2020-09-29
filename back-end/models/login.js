@@ -9,7 +9,7 @@ const getUserInfo = async (_email) => {
       .execute())
     .then((result) => result.fetchAll()[0] || []);
   const [id, name, email, password, role] = userInfo;
-  return { id, name, email, password, role };
+  return ({ id, name, email, password, role });
 };
 
 module.exports = {
