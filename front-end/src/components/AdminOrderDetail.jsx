@@ -12,10 +12,11 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
         console.log('Pedido atualizado!');
     }
   };
-  console.log(Children);
+
   if (!Children.orderProducts.length) {
     return (<div>Order Not Found!</div>);
   }
+
   return (
     <div>
       { Children &&
