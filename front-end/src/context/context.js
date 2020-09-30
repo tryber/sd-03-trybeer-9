@@ -8,6 +8,7 @@ const BeerProvider = ({ children }) => {
   const [title, setTitle] = useState('');
   const [orderNumber, setOrderNumber] = useState(null);
   const [orderInfo, setOrderInfo] = useState({});
+  const [statusChanged, setStatusChanged] = useState(false);
 
   const context = {
     cart,
@@ -18,6 +19,8 @@ const BeerProvider = ({ children }) => {
     setOrderNumber,
     orderInfo,
     setOrderInfo,
+    statusChanged,
+    setStatusChanged,
   };
 
   return (

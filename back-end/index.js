@@ -11,12 +11,15 @@ const products = require('./controllers/products');
 const productList = require('./controllers/productList');
 const checkout = require('./controllers/checkout');
 const orderDetails = require('./controllers/orderDetails');
+const admin = require('./controllers/admin');
+const adminOrders = require('./controllers/adminOrders');
 
 const app = express();
 app.use(cors(), bodyParser.json());
 
 app.use('/', bodyParser.json());
 
+app.use('/admin', admin);
 app.use('/checkout', checkout);
 app.use('/login', login);
 app.use('/profile', profile);
@@ -25,7 +28,8 @@ app.use('/productList', productList);
 app.use('/orderDetails', orderDetails);
 
 app.use('/images', express.static(path.join(__dirname, '/images')));
-app.get('/products', products);
+app.use('/products', products);
+app.use('/adminOrders', adminOrders);
 
 const PORT = process.env.PORT || 3001;
 
