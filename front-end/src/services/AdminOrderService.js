@@ -4,10 +4,9 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const AdminDetailOrderAPI = (id) =>
-  axios.get(`http://localhost:3001/admin/orders/${id}`,
+const AdminDetailOrderAPI = (id) => axios.get(`http://localhost:3001/admin/orders/${id}`,
   {
-    id
+    id,
   },
   headers)
   .then((res) => res)
