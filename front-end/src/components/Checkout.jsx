@@ -216,7 +216,7 @@ const Checkout = () => {
             && listCart.map((e, i) => {
               actualProduct = products.data.filter((f) => f.name === e.name);
               return (<div key={`beer-item-${i}`} className="beerCard">
-              <div key={`${e.name}-img`} className="imgDiv"><img src={`${actualProduct[0].urlImage}`} alt={e.name} width="100%"/></div>
+              <div key={`${e.name}-img`} className="imgDiv"><img src={`${actualProduct[0].urlImage}`} alt={e.name} /></div>
               <div className="description">
               <p key={e.name}>
               {/* Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString */}
@@ -247,7 +247,7 @@ const Checkout = () => {
               </div>
             </div>)})}
         </div>
-      <div>
+      <div className="total">
         <span>Total: </span>
         <span data-testid="order-total-value">
           R${' '}
@@ -258,7 +258,7 @@ const Checkout = () => {
       </div>
       </div>
       <div className="addressForm">
-        <fieldset>
+        <fieldset className="fieldSet">
           <legend>Endereço para entrega</legend>
           <label htmlFor="delivery_address">Rua</label>
           <input

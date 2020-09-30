@@ -4,9 +4,11 @@
 
 .addressForm {
   align-items: flex-end;
+  align-self: stretch;
   display: flex;
   flex: 1 1;
   height: 30%;
+  width: 100%;
 }
 
 .beerCard {
@@ -14,6 +16,7 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  height: 40%;
   justify-content: space-between;
 }
 
@@ -64,6 +67,48 @@
   width: 45vw;
 }
 
+.fieldSet {
+  width: 100%;
+}
+
+h2 {
+  height: 5vh;
+}
+
+img {
+  height: 15vh;
+  width: auto;
+}
+
 .imgDiv {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   width: 45vw;
+}
+
+.total {
+  height: 5vh;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+  .beerCard {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 30%;
+    justify-content: flex-start;
+    width: 30%;
+  }
+
+  .beerContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 80%;
+    overflow: scroll;
+  }
 }
