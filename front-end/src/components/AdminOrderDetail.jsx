@@ -1,7 +1,18 @@
 import React from 'react';
-import adminOrderDetailCSS from './CSS/AdminOrderDetail.css';
+import AdminChangeStatusOrderAPI from '../services/AdminOrderChangeStatusService';
+import './CSS/AdminOrderDetail.css';
 
-const adminOrderDetail = ({Children, OrderNumber}) => {
+const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
+  let disableBtn = false;
+  const changeOrderStatus = async () => {
+    const response = await AdminChangeStatusOrderAPI(OrderNumber);
+    if (response) {
+      if (response.status === 202)
+        StatusChanged(true);
+        console.log('Pedido atualizado!');
+    }
+  };
+  
   return (
     <div>
       { Children &&
@@ -23,8 +34,14 @@ const adminOrderDetail = ({Children, OrderNumber}) => {
           `Total R$ ${(Children.orderProducts.reduce(((acc, e) =>
               acc = e.price * e.quantity), 0)).toFixed(2).replace('.',',')}`
           }
+        </div>{ (Children.orderStatus[0].status === 'Entregue') ? disableBtn = true : disableBtn = false }
+        <div>
+          { !disableBtn &&
+            <button
+              data-testid="mark-as-delivered-btn" onClick={() => changeOrderStatus()}
+            >Marcar como entregue</button>
+          }
         </div>
-        <div><button data-testid="mark-as-delivered-btn">Marcar como entregue</button></div>
       </div>
       }
     </div>

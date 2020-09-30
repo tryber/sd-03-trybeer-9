@@ -56,8 +56,19 @@ const getStatusOrderById = async (id) => connection()
   .then((data) => data.map(([_id, status]) => ({ status })))
   .catch((error) => error);
 
+const changeStatusOrderById = async (id) => connection()
+  .then((db) => db.getTable('sales')
+    .update()
+    .set('status', 'Entregue')
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .then(() => ({ saleId: id, status: 'Entregue' }))
+  .catch((error) => error);
+
 module.exports = {
   createOrder,
   getDetailByOrderId,
   getStatusOrderById,
+  changeStatusOrderById,
 };
