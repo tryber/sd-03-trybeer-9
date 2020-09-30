@@ -1,0 +1,69 @@
+.addressButton {
+  background-color: #16F29E;
+}
+
+.addressForm {
+  align-items: flex-end;
+  display: flex;
+  flex: 1 1;
+  height: 30%;
+}
+
+.beerCard {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.beerContainer {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  height: 70%;  
+}
+
+.beerContent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 80%;
+  overflow: scroll;
+}
+
+.checkoutButton {
+  background-color: #0E9E67;
+  color: white;
+}
+
+.checkoutCard {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 90vh;
+  justify-content: space-between;
+}
+
+.checkoutPage {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  height: 100vh;
+}
+
+.deleteButton {
+  background-color: white;
+  color: #0E9E67;
+}
+
+.description {
+  width: 45vw;
+}
+
+.imgDiv {
+  width: 45vw;
+}

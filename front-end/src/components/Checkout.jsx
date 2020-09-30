@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SaleOrderAPI from '../services/SaleOrderService';
+import './CSS/Checkout.css'
 
 const createOrderAPI = async ({
   userId,
@@ -38,6 +39,20 @@ const Checkout = () => {
   const [message, setMessage] = useState('');
   const [localStorageActualized, setLocalStorageActualized] = useState(false);
   const [address, setAddress] = useState([]);
+  const [products, setProducts] = useState();
+
+  useEffect(() => {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    axios.get('http://localhost:3001/products',
+  {
+    products: 'All',
+  },
+  headers)
+  .then((res) => setProducts(res))
+  .catch((error) => error);
+  }, []);
 
   useEffect(() => {
     // Inicializacao do sensor de mudança do localStorage
@@ -161,6 +176,7 @@ const Checkout = () => {
       setMessage('Redirecionando');
     }, 2000);
   }
+
   if (message === 'Redirecionando') {
     return (<Redirect to="/products" />);
   }
@@ -174,58 +190,74 @@ const Checkout = () => {
     setDeliveryAddress(address.street);
   }
 
+  let actualProduct;
+
   return (
-    <div>
-    {console.log(address)}
-      <h2>Produtos</h2>
-      <br />
+    <div className="checkoutCard">
+      <div className="beerContainer">
+      {console.log(address)}
+        <h2>Produtos</h2>
+        <br />
+        <div>
+          {!showDisplay
+            && <h2>Não há produtos no carrinho</h2>}
+        </div>
+        {/* <div>
+          {showDisplay
+            && <p>
+              <span>Qtd</span>
+              <span>Descrição</span>
+              <span>Valor unitário</span>
+              <span>Valor Total</span>
+            </p>}
+        </div> */}
+        <div className="beerContent">
+          {showDisplay && products
+            && listCart.map((e, i) => {
+              actualProduct = products.data.filter((f) => f.name === e.name);
+              return (<div key={`beer-item-${i}`} className="beerCard">
+              <div key={`${e.name}-img`} className="imgDiv"><img src={`${actualProduct[0].urlImage}`} alt={e.name} width="100%"/></div>
+              <div className="description">
+              <p key={e.name}>
+              {/* Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString */}
+              <span data-testid={`${i}-product-qtd-input`}>{e.quantity}</span>
+              {' '}
+              <span data-testid={`${i}-product-name`}>{e.name}</span>
+              <br />
+              <span
+                data-testid={`${i}-product-unit-price`}
+              >
+                {`(R$ ${e.price.toFixed(2).replace('.', ',')} un)`}
+              </span>
+              <br />
+              <span
+                data-testid={`${i}-product-total-value`}
+              >
+                {`R$ ${(e.quantity * e.price).toFixed(2).replace('.', ',')}`}
+              </span>
+              {' '}
+              <button
+                className="deleteButton"
+                data-testid={`${i}-removal-button`}
+                onClick={() => removeItem(e.name)}
+              >
+                X
+              </button>
+            </p>
+              </div>
+            </div>)})}
+        </div>
       <div>
-        {!showDisplay
-          && <h2>Não há produtos no carrinho</h2>}
-      </div>
-      <div>
-        {showDisplay
-          && <p>
-            <span>Qtd</span>
-            <span>Descrição</span>
-            <span>Valor unitário</span>
-            <span>Valor Total</span>
-          </p>}
-      </div>
-      <div>
-        {showDisplay
-          && listCart.map((e, i) => (<p key={e.name}>
-            {/* Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString */}
-            <span data-testid={`${i}-product-qtd-input`}>{e.quantity}</span>
-            <span data-testid={`${i}-product-name`}>{e.name}</span>
-            <span
-              data-testid={`${i}-product-unit-price`}
-            >
-              {`(R$ ${e.price.toFixed(2).replace('.', ',')} un)`}
-            </span>
-            <span
-              data-testid={`${i}-product-total-value`}
-            >
-              {`R$ ${(e.quantity * e.price).toFixed(2).replace('.', ',')}`}
-            </span>
-            <button
-              data-testid={`${i}-removal-button`}
-              onClick={() => removeItem(e.name)}
-            >
-              X
-            </button>
-          </p>))}
-      </div>
-      <div>
-        <span>Total:</span>
+        <span>Total: </span>
         <span data-testid="order-total-value">
-          R$
+          R${' '}
           {
             totalPrice.toFixed(2).replace('.', ',')
           }
         </span>
       </div>
-      <div>
+      </div>
+      <div className="addressForm">
         <fieldset>
           <legend>Endereço para entrega</legend>
           <label htmlFor="delivery_address">Rua</label>
@@ -262,10 +294,11 @@ const Checkout = () => {
             onChange={(e) => setDeliveryCity(e.target.value)}
           />
           <br />
-          <button onClick={() => setAddressField()}>Usar Endereço cadastrado</button>
+          <button className="addressButton" onClick={() => setAddressField()}>Usar Endereço cadastrado</button>
           <button
             type="button"
             data-testid="checkout-finish-btn"
+            className="checkoutButton"
             disabled={
               !localStorageCart.length
               || (message === 'Compra realizada com sucesso!')
