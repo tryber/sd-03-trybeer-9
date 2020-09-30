@@ -1,10 +1,11 @@
 import React from 'react';
 import AdminSideBar from '../components/AdminSideBar';
+import AdminOrders from '../components/AdminOrders';
 
 function AdminOrdersPage () {
   return (
     <div>
-      <AdminSideBar Children = {<div>O Componente de ordens Aqui!</div>}/>
+      <AdminSideBar Children = { <AdminOrders />}/>
     </div>
   );
 }
