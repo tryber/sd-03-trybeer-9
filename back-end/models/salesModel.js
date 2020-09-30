@@ -36,6 +36,39 @@ const createOrder = async (
   }))
   .catch((error) => error);
 
+const getDetailByOrderId = async (id) => connection()
+  .then((db) => db.getTable('sales_products')
+    .select(['sale_id', 'product_id', 'quantity'])
+    .where('sale_id = :id')
+    .bind('id', id)
+    .execute())
+  .then((result) => result.fetchAll())
+  .then((data) => data.map(([saleId, productId, quantity]) => ({ saleId, productId, quantity })))
+  .catch((error) => error);
+
+const getStatusOrderById = async (id) => connection()
+  .then((db) => db.getTable('sales')
+    .select(['id', 'status'])
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .then((result) => result.fetchAll())
+  .then((data) => data.map(([_id, status]) => ({ status })))
+  .catch((error) => error);
+
+const changeStatusOrderById = async (id) => connection()
+  .then((db) => db.getTable('sales')
+    .update()
+    .set('status', 'Entregue')
+    .where('id = :id')
+    .bind('id', id)
+    .execute())
+  .then(() => ({ saleId: id, status: 'Entregue' }))
+  .catch((error) => error);
+
 module.exports = {
   createOrder,
+  getDetailByOrderId,
+  getStatusOrderById,
+  changeStatusOrderById,
 };
