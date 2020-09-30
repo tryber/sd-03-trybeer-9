@@ -1,18 +1,68 @@
 .card-products {
-  border: 1px solid black;
+  display: flex;
   margin: 5px 5px;
   text-align: center;
-  width: 180px;
-  
+  width: 176px;
+  background-color: #fff;
+  justify-content: space-around;
+  padding-right: 10px;
+}
+
+.card-products:hover {
+  /* border: 1px solid black; */
+  transition-duration: 0.2s;
+  box-shadow: 2px 2px 4px 4px black;
 }
 
 .img-products {
   height: 150px;
-  width: 130px;
+  max-width: 120px;
 }
 
 .render-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.btn {
+  border-style: none;
+  height: 23px;
+  margin: 3px;
+  align-self: center;
+}
+
+.btn-cart {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  align-self: center;
+}
+
+.qtd-basket {
+  margin: 7px;
+}
+.details-product {
+  align-self:  flex-end;
+}
+
+.product-price {
+  color: #0E9E67;
+}
+
+.title-product {
+  font-family: "Indie Flower", cursive;
+}
+
+@media screen and (max-width: 400px) {
+  .card-products {
+    justify-content: space-around;
+    width: 100%;
+    padding: 18px;
+  }
+  .card-products:hover {
+    box-shadow: none;
+  }
 }
