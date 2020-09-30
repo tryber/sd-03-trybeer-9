@@ -13,6 +13,7 @@ const adminOrderDetail = ({Children, OrderNumber}) => {
             <div>{` - `}</div>
             <div data-testid={`${i}-product-name`}>{e.name}</div>
             <div data-testid={`${i}-product-total-value`}>{`R$ ${(e.quantity*e.price).toFixed(2).replace('.',',')}`}</div>
+            <div data-testid={`${i}-order-unit-price`}>{`(R$ ${e.price})`}</div>
           </div>
         )}
       </div>
