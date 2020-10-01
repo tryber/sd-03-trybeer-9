@@ -6,10 +6,10 @@ import App from './App';
 import BeerProvider from './context/context';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <BeerProvider>
+  <BeerProvider>
+    <BrowserRouter>
       <App />
-    </BeerProvider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </BeerProvider>,
   document.getElementById('root'),
 );

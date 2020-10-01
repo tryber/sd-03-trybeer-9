@@ -126,6 +126,7 @@ const UserRegisterForm = () => {
             }
           }
         }
+        // onClick={() => simpleFunction()}
         disabled={!showButton}
       >Cadastrar</button>
       </fieldset>
