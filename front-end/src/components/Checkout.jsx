@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import SaleOrderAPI from '../services/SaleOrderService';
 
+// Commit inicial
+
 const createOrderAPI = async ({
       userId,
       totalPrice,
