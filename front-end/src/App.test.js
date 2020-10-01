@@ -1,9 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import renderWithRouter from './_tests_/renderWithRouter';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders Trybeer logo', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const tag = getByText(/Trybeer/i);
+  expect(tag).toBeInTheDocument();
 });
