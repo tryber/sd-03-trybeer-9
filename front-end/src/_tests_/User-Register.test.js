@@ -65,12 +65,14 @@ test('test input warnings', () => {
   expect(passwordWarning).toBeInTheDocument();
 });
 
-jest.mock('../services/UserRegisterService', () => ({
-  name: 'Marco Barbosa',
-  email: 'marco.meireles.b@gmail.com',
-  password: 123456,
-  role: 'administrator',  
-}));
+// jest.mock('../services/UserRegisterService', () => ({
+//   name: 'Marco Barbosa',
+//   email: 'marco.meireles.b@gmail.com',
+//   password: 123456,
+//   role: 'administrator',  
+// }));
+
+jest.mock('./helper/simpleFunction', () => {console.log('Fui clickada estando mockada')});
 
 test('test api return role client', async () => {
   const { getByTestId, history } = renderWithRouter(<App />);
