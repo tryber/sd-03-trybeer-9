@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './CSS/Login.css';
-
-// Avisar quando o banco não estiver ligado
+import trybe from '../img/trybe.png'
+import beer from '../img/green-beer.png'
 
 const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAdminHome) => {
+  console.log('teste')
   axios.post('http://localhost:3001/login', { password, email })
     .then(({
       data: {
         token, name, email: _email, role,
       },
     }) => {
+      console.log(name)
       localStorage.setItem('user', JSON.stringify({
         token, name, email: _email, role,
       }));
@@ -23,6 +25,7 @@ const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAd
 const verifyInput = (email, password, setDisabled) => {
   const minLenght = 4;
   const regex = /^\S+@\S+$/;
+  console.log(email, password)
   if ((email.match(regex)) && (password.length > minLenght)) { setDisabled(false); }
 };
 
@@ -34,10 +37,10 @@ function Login() {
   const [redirectToAdminHome, setRedirectToAdminHome] = useState(false);
   const [redirectToRegister, setRedirectToRegister] = useState(false);
   const [disabled, setDisabled] = useState(true);
-
   return (
     <div className="login-page">
-      <h1>Trybeer</h1>
+     <div className="logo"> <span>TR</span><img src={trybe} width="50px"/><span>BEER</span></div>
+     <img className="beer" src={beer} width="300px"/>
       <div className="login-form">
         <div>
           <p>Email</p>
@@ -45,11 +48,13 @@ function Login() {
         </div>
         <div>
           <p>Password</p>
-          <input data-testid="password-input" onChange={ (event) => { setPassword(event.target.value); verifyInput(email, password, setDisabled); } } value={ password } />
+          <input data-testid="password-input" type="password" onChange={ (event) => { setPassword(event.target.value); verifyInput(email, password, setDisabled); } } value={ password } />
         </div>
         {(message) && <p>{message}</p>}
+        <div className="login-btn">
         <button disabled={ disabled } data-testid="signin-btn" onClick={ () => doLogin(password, email, setMessage, setRedirectToHome, setRedirectToAdminHome) } type="button">ENTRAR</button>
         <button onClick={ () => setRedirectToRegister(true) } data-testid="no-account-btn" type="button">Ainda não tenho conta</button>
+        </div>
         {redirectToHome && <Redirect to="/products" />}
         {redirectToAdminHome && <Redirect to="/admin/orders" />}
         {redirectToRegister && <Redirect to="/register" />}

@@ -82,12 +82,31 @@ const filterProduct = (product, dataApi, setDataApi, allProducts) => {
   setDataApi(filteredProducts);
 };
 
+const orderProducts = (ord, dataApi, setDataApi) => {
+    if (ord === 'desc')  {dataApi.sort((a, b) => (a.price > b.price) ? 1 : -1)
+    setDataApi(dataApi)} else {dataApi.sort((a, b) => (a.price > b.price) ? -1 : 1)}
+}
+const sorter = (dataApi, setDataApi, orderer, setOrderer) => {
+  return (
+    <div>
+      <p>Ordenar por</p>
+      <select onChange={(e) => {setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi)}} value={orderer}>
+        <option value=""></option>
+        <option value="desc">Maior para Menor</option>
+        <option value="asc">Menor para Maior</option>
+      </select>
+    </div>
+
+  )
+}
+
 function Products() {
   const [dataApi, setDataApi] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [searchedItem, setSearchedItem] = useState('');
   const { cart, setCart, setTitle } = useContext(BeerContext);
   const [redirectLogin, setRedirectLogin] = useState(false);
+  const [orderer, setOrderer] = useState('');
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
@@ -105,6 +124,7 @@ function Products() {
       {redirectLogin && <Redirect to="/login" />}
       <MenuTop />
       <div>
+        {sorter(dataApi, setDataApi, orderer, setOrderer)}
         <p>Buscar Produto</p>
         <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
       </div>

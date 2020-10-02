@@ -17,6 +17,10 @@ const app = express();
 app.use(cors(), bodyParser.json());
 
 app.use('/', bodyParser.json());
+app.use((req, res, next) => {
+  console.log(req.path);
+  next();
+})
 
 app.use('/checkout', checkout);
 app.use('/login', login);
