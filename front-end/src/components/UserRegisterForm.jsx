@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import RegisterUserAPI from '../services/UserRegisterService';
-import simpleFunction from '../_tests_/helper/simpleFunction';
-
-const createUserAPI = async (name, email, password, role) => {
-  return await RegisterUserAPI(name, email, password, role)
-    .then((data) =>  data)
-    .catch((error) => error);
-};
+import createUserAPI from '../services/functions/createUserAPI';
 
 const UserRegisterForm = () => {
   const [name, setName] = useState();
@@ -114,20 +107,19 @@ const UserRegisterForm = () => {
       /><span>Quero Vender</span><br/>
       <button
         data-testid="signup-btn" type="submit"
-        // onClick={ async () => {
-        //   const result = await createUserAPI(name, email, password, role);
-        //   if (result) {
-        //     if (result.message) {
-        //       return setBackendResponse('E-mail already in database.');
-        //     }
-        //     if (role === 'administrator') {
-        //       return setRedirectTo('/admin/orders');
-        //     }
-        //     return setRedirectTo('/products');
-        //     }
-        //   }
-        // }
-        onClick={() => simpleFunction()}
+        onClick={ async () => {
+          const result = await createUserAPI(name, email, password, role);
+          if (result) {
+            if (result.message) {
+              return setBackendResponse('E-mail already in database.');
+            }
+            if (role === 'administrator') {
+              return setRedirectTo('/admin/orders');
+            }
+            return setRedirectTo('/products');
+            }
+          }
+        }
         disabled={!showButton}
       >Cadastrar</button>
       </fieldset>
