@@ -1,7 +1,6 @@
 import React from 'react';
 import { cleanup, fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
-import App from '../App';
 import RegisterPage from '../pages/User-Register';
 
 const spyReturns = (returnValue) => jest.fn(() => returnValue);
@@ -60,9 +59,7 @@ describe('scenario', () => {
   });
 
   test('test input warnings', () => {
-    const { getByTestId, getByText } = renderWithRouter(<App />);
-    const newRegister = getByTestId('no-account-btn');
-    fireEvent.click(newRegister);
+    const { getByTestId, getByText } = renderWithRouter(<RegisterPage />);
     const name = getByTestId('signup-name');
     const email = getByTestId('signup-email');
     const password = getByTestId('signup-password');
@@ -85,11 +82,9 @@ describe('scenario', () => {
   });
 
   test('test api return role client', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouter(<RegisterPage />);
     const { mockedModule } = setup();
     console.log(mockedModule);
-    const newRegister = getByTestId('no-account-btn');
-    fireEvent.click(newRegister);
     const name = getByTestId('signup-name');
     const email = getByTestId('signup-email');
     const password = getByTestId('signup-password');
@@ -109,11 +104,9 @@ describe('scenario', () => {
   });
 
   test('test api return role administrator', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouter(<RegisterPage />);
     const { mockedModule } = setup();
     console.log(mockedModule);
-    const newRegister = getByTestId('no-account-btn');
-    fireEvent.click(newRegister);
     const name = getByTestId('signup-name');
     const email = getByTestId('signup-email');
     const password = getByTestId('signup-password');

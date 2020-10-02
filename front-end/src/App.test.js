@@ -2,8 +2,8 @@ import React from 'react';
 import renderWithRouter from './_tests_/renderWithRouter';
 import App from './App';
 
-test('renders Trybeer logo', () => {
-  const { getByText } = renderWithRouter(<App />);
-  const tag = getByText(/Trybeer/i);
-  expect(tag).toBeInTheDocument();
+test('Test redirection', () => {
+  const app = renderWithRouter(<App />);
+  const { history } = app;
+  expect(history.location.pathname).toBe('/login');
 });
