@@ -1,9 +1,8 @@
 const { changeStatusOrderById } = require('../models/salesModel');
 
-const adminOrderDetailService = async (req, res) => {
+const adminOrderDetailChangeService = async (req, res) => {
   const { id } = req.params;
   const result = await changeStatusOrderById(id);
-  console.log('resultado do mock: ', result);
   if (result) {
     res.status(202).send(result);
   } else {
@@ -11,4 +10,4 @@ const adminOrderDetailService = async (req, res) => {
   }
 };
 
-module.exports = adminOrderDetailService;
+module.exports = adminOrderDetailChangeService;
