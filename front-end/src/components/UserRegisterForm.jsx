@@ -26,6 +26,7 @@ const UserRegisterForm = () => {
   const [number, setNumber] = useState('');
   const [city, setCity] = useState('');
   const [cep, setCep] = useState('');
+  const [cepMessage, setCepMessage] = useState(false);
   let role = 'client';
 
   useEffect(() => {
@@ -94,13 +95,14 @@ const UserRegisterForm = () => {
   }
 
   const setAllAddress = (cep) => {
-    Axios.get(`https://viacep.com.br/ws/${cep}/json/`).then(({ data: { logradouro, bairro, localidade } }) => {
-      if (localidade) {
+    Axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(({ data: { logradouro, bairro, localidade } }) => {
         setDistrict(bairro);
         setStreet(logradouro);
         setCity(localidade);
-      }
+        setCepMessage(false)
     })
+    .catch(() => setCepMessage(true))
   }
 
   return (
@@ -128,6 +130,7 @@ const UserRegisterForm = () => {
           /><span>{passwordWarning}</span>
           <label htmlFor="cep">CEP</label>
           <input id="cep" onChange={(e) => setCep(e.target.value)} value={cep} />
+          {cepMessage && <p>Informe um CEP válido!</p>}
           <button type="button" onClick={() => setAllAddress(cep)}>Buscer CEP</button>
           <label htmlFor="street">Rua</label>
           <input id="street" onChange={(e) => setStreet(e.target.value)} value={street} />
