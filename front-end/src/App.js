@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import BeerProvider from './context/context';
+
 import {
   Switch,
   Route,
@@ -17,6 +19,7 @@ import AdminProfilePage from './pages/AdminProfilePage';
 
 function App() {
   return (
+  <BeerProvider>
     <Switch>
       <Route path="/admin/orders" component={AdminOrders} />
       <Route path="/checkout" component={Checkout} />
@@ -29,6 +32,8 @@ function App() {
       <Route path="/admin/profile" component={AdminProfilePage} />
       <Route exact path="/" component={Home} />
     </Switch>
+  </BeerProvider>
+
   );
 }
 

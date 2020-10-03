@@ -4,23 +4,11 @@ import { act } from 'react-dom/test-utils'
 import App from '../App';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter'
+import axios, { create } from 'axios';
 
-
-// jest.mock('axios', () => {
-//   return {
-//     ...jest.requireActual('axios'),
-//     post: () => Promise.resolve ({
-//       data: {
-//         token: '121fsdfsdfsd', name: 'user', email: 'user@test.com', role: 'user'
-//       },
-//     })
-//   }
-// })
-
-const mock = new MockAdapter(axios);
+jest.mock('axios');
 const obj = { token: '1212fsdfsdfsd', name: 'User', email: 'user@test.com', role: 'user' }
+
 
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
@@ -57,17 +45,21 @@ describe('testing Login', () => {
   });
 
   test('renders the product page after login', async () => {
-
-    mock.onPost('http://localhost:3001/login').reply(200, { data: obj })
+    axios.post.mockImplementationOnce(() => Promise.resolve({data: obj})); 
     const { getByText, getByTestId, history } = renderWithRouter(<App />);
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const signIn = getByTestId('signin-btn');
     fireEvent.change(emailInput, { target: { value: 'user@test2.com' } });
     fireEvent.change(passwordInput, { target: { value: 'test123' } });
-    fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'test123' } });
-    fireEvent.click(signIn);
+    act(() => {
+      fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
+      fireEvent.change(passwordInput, { target: { value: 'test123' } });
+      fireEvent.click(signIn);
+    })
+    console.log(document.body.innerHTML)
+    // await waitForDomChange();
+    // axios.get.mockImplementationOnce(() => Promise.resolve({data: obj}));
     const pathname = history.location.pathname
     console.log(pathname);
 

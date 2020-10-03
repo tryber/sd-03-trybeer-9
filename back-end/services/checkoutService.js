@@ -11,15 +11,15 @@ const checkoutService = async (req, res) => {
     status,
     store,
   } = req.body;
-  // Validações
 
-  const obj = {};
-  store.forEach(({ name }) => {
-    if (Object.keys(obj).includes(name)) { obj[name] += 1; } else { obj[name] = 1; }
-  });
-  const keys = Object.keys(obj);
-  const values = Object.values(obj);
-  const finalStore = keys.map((e, i) => ({ name: e, quantity: values[i] }));
+  // Validações
+  const finalStore = store.reduce((acc, e) => {
+    if (acc.find(el => el.name === e.name))
+    return [...acc.filter(el => el.name !== e.name ), {name: e.name, quantity: acc.filter(el => el.name === e.name)[0].quantity + 1}]
+    return [...acc, {name: e.name, quantity: 1}]
+  }, [])
+
+
 
   // Salva no banco
   const response = await createOrder(

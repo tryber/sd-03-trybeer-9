@@ -20,7 +20,8 @@ const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAd
       return (role === 'administrator') ? setRedirectToAdminHome(true) : setRedirectToHome(true);
     })
     .catch((err) => ((err.response) ? setMessage(err.response.data.message) : setMessage('Servidor desligado')));
-};
+    // axios.get('/teste').then((data) => {console.log(data)})
+  };
 
 const verifyInput = (email, password, setDisabled) => {
   const minLenght = 4;

@@ -6,10 +6,8 @@ import App from './App';
 import BeerProvider from './context/context';
 
 ReactDOM.render(
-  <BeerProvider>
     <BrowserRouter>
       <App />
-    </BrowserRouter>
-  </BeerProvider>,
+    </BrowserRouter>,
   document.getElementById('root'),
 );
