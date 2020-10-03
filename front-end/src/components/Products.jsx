@@ -33,7 +33,7 @@ const removeToBascket = (cart, name, setCart) => {
     localStorage.setItem('cart', JSON.stringify(cart));
     setCart(cart);
   }
-}
+};
 
 const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
   id, name, price, urlImage,
@@ -77,29 +77,27 @@ const filterProduct = (product, dataApi, setDataApi, allProducts) => {
 
 const orderProducts = (ord, dataApi, setDataApi) => {
   switch (ord) {
-    case 'asc': return dataApi.sort((a, b) => (a.price > b.price) ? 1 : -1);
-    case 'desc': return dataApi.sort((a, b) => (a.price > b.price) ? -1 : 1);
-    case 'atoz': return dataApi.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    case 'ztoa': return dataApi.sort((a, b) => (a.name > b.name) ? -1 : 1);
-    default: setDataApi(dataApi);
+    case 'asc': return dataApi.sort((a, b) => ((a.price > b.price) ? 1 : -1));
+    case 'desc': return dataApi.sort((a, b) => ((a.price > b.price) ? -1 : 1));
+    case 'atoz': return dataApi.sort((a, b) => ((a.name > b.name) ? 1 : -1));
+    case 'ztoa': return dataApi.sort((a, b) => ((a.name > b.name) ? -1 : 1));
+    default: return setDataApi(dataApi);
   }
-}
+};
 
-const sorter = (dataApi, setDataApi, orderer, setOrderer) => {
-  return (
-    <div className="orderer">
-      <p>Ordenar por:</p>
-      <select onChange={(e) => { setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi) }} value={orderer}>
-        <option value=""></option>
-        <option value="desc">Maior para Menor</option>
-        <option value="asc">Menor para Maior</option>
-        <option value="atoz">A -> Z</option>
-        <option value="ztoa">Z -> A</option>
-      </select>
-    </div>
+const sorter = (dataApi, setDataApi, orderer, setOrderer) => (
+  <div className="orderer">
+    <p>Ordenar por:</p>
+    <select onChange={(e) => { setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi); }} value={orderer}>
+      <option value="" />
+      <option value="desc">Maior para Menor</option>
+      <option value="asc">Menor para Maior</option>
+      <option value="atoz">{'A -> Z'}</option>
+      <option value="ztoa">{'Z -> A'}</option>
+    </select>
+  </div>
 
-  )
-}
+);
 
 function Products() {
   const [dataApi, setDataApi] = useState([]);
