@@ -16,3 +16,55 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 40px;
+}
+
+.search-input input{
+  height: 45px;
+  border-radius: 40px;
+  position: absolute;
+  right: -2px;
+  width: 45px;
+  transition: 0.5s;
+  outline: none;
+}
+
+.search-input img {
+  width: 30px;
+  position: absolute;
+  right: 0;
+  background: #12CC85;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.search-input:hover input {
+  width: 300px;
+  padding-left: 10px;
+}
+
+.orderer {
+  display: flex;
+  align-items: center;
+}
+
+.orderer select {
+  height: 40px;
+  width: 150px;
+  outline: none;
+  background: #12CC85;
+  border-radius: 30px;
+  margin-left: 10px;
+
+}
+
+.filters {
+  display: flex;
+  height: 60px;
+  justify-content: space-around;
+}

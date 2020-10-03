@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import BeerProvider from './context/context';
-
 import {
   Switch,
   Route,
 } from 'react-router-dom';
+import BeerProvider from './context/context';
+
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Home from './components/Home';
@@ -20,21 +20,21 @@ import AdminOrderDetailPage from './pages/AdminOrderDetailPage';
 
 function App() {
   return (
-  <BeerProvider>
-    <Switch>
-    <Route path="/admin/orders/:id" component={ AdminOrderDetailPage } />
-      <Route path="/admin/orders" component={AdminOrders} />
-      <Route path="/checkout" component={Checkout} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/profile" component={Profile} />
-      <Route exact path="/products" component={Products} />
-      <Route exact path="/register" component={UserRegisterPage} />
-      <Route exact path="/orders" component={Orders} />
-      <Route exact path="/orders/:id" component={OrderDetails} />
-      <Route path="/admin/profile" component={AdminProfilePage} />
-      <Route exact path="/" component={Home} />
-    </Switch>
-  </BeerProvider>
+    <BeerProvider>
+      <Switch>
+        <Route path="/admin/orders/:id" component={ AdminOrderDetailPage } />
+        <Route path="/admin/orders" component={ AdminOrders } />
+        <Route path="/checkout" component={ Checkout } />
+        <Route exact path="/login" component={ Login } />
+        <Route exact path="/profile" component={ Profile } />
+        <Route exact path="/products" component={ Products } />
+        <Route exact path="/register" component={ UserRegisterPage } />
+        <Route exact path="/orders" component={ Orders } />
+        <Route exact path="/orders/:id" component={ OrderDetails } />
+        <Route path="/admin/profile" component={ AdminProfilePage } />
+        <Route exact path="/" component={ Home } />
+      </Switch>
+    </BeerProvider>
 
   );
 }

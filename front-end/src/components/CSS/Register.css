@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  animation: animateRegister 1s linear;
 }
 
 .register-main h1 {
@@ -106,4 +107,16 @@ fieldset input:checked[type="checkbox"]:before {
   width: 10px;
   border-color: #0f0;
   transform: rotate(45deg)
+}
+
+
+@keyframes animateRegister {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

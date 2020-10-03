@@ -1,19 +1,22 @@
 import React from 'react';
-import { render, fireEvent, cleanup, waitForDomChange } from '@testing-library/react';
-import { act } from 'react-dom/test-utils'
-import App from '../App';
-import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import axios, { create } from 'axios';
+import {
+  render, fireEvent, cleanup,
+} from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import { Router } from 'react-router-dom';
+import axios from 'axios';
+import App from '../App';
 
 jest.mock('axios');
-const obj = { token: '1212fsdfsdfsd', name: 'User', email: 'user@test.com', role: 'user' }
-
+const obj = {
+  token: '1212fsdfsdfsd', name: 'User', email: 'user@test.com', role: 'user',
+};
 
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
   return {
-    ...render(<Router history={history}>{component}</Router>), history,
+    ...render(<Router history={ history }>{component}</Router>), history,
   };
 };
 
@@ -21,7 +24,7 @@ describe('testing Login', () => {
   afterEach(cleanup);
 
   test('renders the login page', () => {
-    const { getByText, getByTestId, } = renderWithRouter(<App />);
+    const { getByText, getByTestId } = renderWithRouter(<App />);
     const email = getByText(/email/i);
     const password = getByText(/password/i);
     const signIn = getByTestId('signin-btn');
@@ -33,20 +36,19 @@ describe('testing Login', () => {
   });
 
   test('render the Register Page when choosing so', () => {
-
     const { getByText, getByTestId, history } = renderWithRouter(<App />);
     const noAccount = getByTestId('no-account-btn');
     expect(noAccount).toBeInTheDocument();
     fireEvent.click(noAccount);
-    const pathname = history.location.pathname;
-    expect(pathname).toBe('/register')
+    const { pathname } = history.location;
+    expect(pathname).toBe('/register');
     const register = getByText(/cadastro/i);
     expect(register).toBeInTheDocument();
   });
 
   test('renders the product page after login', async () => {
-    axios.post.mockImplementationOnce(() => Promise.resolve({data: obj})); 
-    const { getByText, getByTestId, history } = renderWithRouter(<App />);
+    axios.post.mockImplementationOnce(() => Promise.resolve({ data: obj }));
+    const { getByTestId } = renderWithRouter(<App />);
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const signIn = getByTestId('signin-btn');
@@ -56,13 +58,9 @@ describe('testing Login', () => {
       fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
       fireEvent.change(passwordInput, { target: { value: 'test123' } });
       fireEvent.click(signIn);
-    })
-    console.log(document.body.innerHTML)
+    });
     // await waitForDomChange();
     // axios.get.mockImplementationOnce(() => Promise.resolve({data: obj}));
-    const pathname = history.location.pathname
-    console.log(pathname);
-
 
     // console.log(passwordInput);
     // console.log(document.body.innerHTML)
@@ -83,4 +81,3 @@ describe('testing Login', () => {
     // expect(skol).toBeInTheDocument();
   });
 });
-

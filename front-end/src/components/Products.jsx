@@ -5,6 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { BeerContext } from '../context/context';
 import MenuTop from './MenuTop';
 import CardProducts from './CardProducts';
+import lupa from '../img/loupe.svg';
 
 const instance = axios.create({ baseURL: 'http://localhost:3001' });
 
@@ -86,9 +87,9 @@ const orderProducts = (ord, dataApi, setDataApi) => {
 
 const sorter = (dataApi, setDataApi, orderer, setOrderer) => {
   return (
-    <div>
-      <p>Ordenar por</p>
-      <select onChange={(e) => {setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi)}} value={orderer}>
+    <div className="orderer">
+      <p>Ordenar por:</p>
+      <select onChange={(e) => { setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi) }} value={orderer}>
         <option value=""></option>
         <option value="desc">Maior para Menor</option>
         <option value="asc">Menor para Maior</option>
@@ -122,10 +123,12 @@ function Products() {
     <div>
       {redirectLogin && <Redirect to="/login" />}
       <MenuTop />
-      <div>
+      <div className="filters">
         {sorter(dataApi, setDataApi, orderer, setOrderer)}
-        <p>Buscar Produto</p>
-        <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
+        <div className="search-input">
+          <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
+          <img src={lupa} />
+        </div>
       </div>
       <div className="render-cards">
         {renderProducts(dataApi, newCart, setCart)}
