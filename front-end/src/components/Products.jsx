@@ -53,7 +53,7 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
           onClick={() => addTobascket(price, name, setCart)}
           data-testid={`${index}-product-plus`}
         >
-          +
+          ▲
     </button>
         <p className="qtd-basket"
           data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
@@ -63,7 +63,7 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
           onClick={() => removeToBascket(cart, name, setCart)}
           data-testid={`${index}-product-minus`}
         >
-          -
+          ▼
     </button>
       </div>
     </div>

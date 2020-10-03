@@ -7,13 +7,15 @@
   justify-content: space-around;
   padding-right: 10px;
   border: 1px solid black;
-  transition: 1gits linear;
+  transform: scaleZ(1);
+  transition: 0.5s linear;
 }
 
 .card-products:hover {
   /* transition-duration: 0.2s; */
   /* border: 1px solid black; */
   box-shadow: 2px 2px 4px 4px black;
+  transform: scaleZ(1.1)
 }
 
 .img-products {
@@ -110,6 +112,14 @@
 }
 
 @media screen and (max-width: 400px) {
+  .filters {
+    justify-content: space-between;
+    margin: 10px;
+  }
+  .orderer {
+    display: flex;
+    flex-direction: column;
+  }
   .card-products {
     justify-content: space-around;
     width: 100%;
