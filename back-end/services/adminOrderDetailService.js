@@ -4,7 +4,6 @@ const { getAllProducts } = require('../models/products');
 const adminOrderDetailService = async (req, res) => {
   const { id } = req.params;
   const result = await getDetailByOrderId(id);
-  console.log(result);
 
   if (result.length) {
     const products = await getAllProducts();
