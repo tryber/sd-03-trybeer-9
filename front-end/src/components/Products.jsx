@@ -46,21 +46,26 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
         urlImage={urlImage}
         classImg="img-products"
       />
-      <button
-        type="button"
-        onClick={() => addTobascket(price, name, setCart)}
-        data-testid={`${index}-product-plus`}
-      >
-        +
+      <div className="buttons">
+        <button
+          className="btn btn-plus"
+          type="button"
+          onClick={() => addTobascket(price, name, setCart)}
+          data-testid={`${index}-product-plus`}
+        >
+          +
     </button>
-      <button
-        type="button"
-        onClick={() => removeToBascket(cart, name, setCart)}
-        data-testid={`${index}-product-minus`}
-      >
-        -
+        <p className="qtd-basket"
+          data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
+        <button
+          className="btn btn-"
+          type="button"
+          onClick={() => removeToBascket(cart, name, setCart)}
+          data-testid={`${index}-product-minus`}
+        >
+          -
     </button>
-      <p data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
+      </div>
     </div>
   ));
 
@@ -130,11 +135,13 @@ function Products() {
       </div>
       <div className="render-cards">
         {renderProducts(dataApi, newCart, setCart)}
-        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
       </div>
-      {cart.length === 0
-        ? <button disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
-        : <button type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho</Link></button>}
+      <div className="btn-cart">
+        {cart.length === 0
+          ? <button className="see-cart" disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
+          : <button className="see-cart" type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho</Link></button>}
+          <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
+      </div>
     </div>
   );
 }

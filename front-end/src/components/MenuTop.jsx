@@ -12,7 +12,7 @@ function MenuTop() {
       <Link className="link-aside" data-testid="side-menu-item-products" to="/products">Produtos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-orders" to="/orders">Meus pedidos</Link>
       <Link className="link-aside" data-testid="side-menu-item-my-profile" to="/profile">Meu Perfil</Link>
-      <Link className="link-aside-sair" data-testid="side-menu-item-logout" to="/login">Sair</Link>
+      <Link className="link-aside" data-testid="side-menu-item-logout" to="/login">Sair</Link>
     </div>
   );
 
