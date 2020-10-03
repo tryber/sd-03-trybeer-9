@@ -216,10 +216,7 @@ const Checkout = () => {
       <div>
         <span>Total:</span>
         <span data-testid="order-total-value">
-          R$
-          {
-            totalPrice.toFixed(2).replace('.', ',')
-          }
+          {`R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
         </span>
       </div>
       <div>
