@@ -19,8 +19,6 @@ const checkoutService = async (req, res) => {
     return [...acc, {name: e.name, quantity: 1}]
   }, [])
 
-
-
   // Salva no banco
   const response = await createOrder(
     userId,

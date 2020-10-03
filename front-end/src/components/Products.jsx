@@ -26,21 +26,13 @@ const addTobascket = (price, name, setCart) => {
 
 const removeToBascket = (cart, name, setCart) => {
   if (cart.length === 0) return;
-  const remove = cart.reduce((acc, e) => {
-    if (e.name === name) {
-      if (acc.counter > 0) {
-        acc.arr = [...acc.arr, e];
-        return acc;
-      }
-      acc.counter = 1;
-      return acc;
-    }
-    acc.arr = [...acc.arr, e];
-    return acc;
-  }, { arr: [], counter: 0 });
-  localStorage.setItem('cart', JSON.stringify(remove.arr));
-  setCart(remove.arr);
-};
+  const removeIndex = cart.findIndex((e) => e.name === name);
+  if (removeIndex >= 0) {
+    cart.splice(removeIndex, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    setCart(cart);
+  }
+}
 
 const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
   id, name, price, urlImage,
@@ -67,7 +59,7 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
       >
         -
     </button>
-      <p data-testid={`${index}-product-qtd`}>{cart.filter((e) => e.name === name).length}</p>
+      <p data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
     </div>
   ));
 
@@ -83,9 +75,15 @@ const filterProduct = (product, dataApi, setDataApi, allProducts) => {
 };
 
 const orderProducts = (ord, dataApi, setDataApi) => {
-    if (ord === 'desc')  {dataApi.sort((a, b) => (a.price > b.price) ? 1 : -1)
-    setDataApi(dataApi)} else {dataApi.sort((a, b) => (a.price > b.price) ? -1 : 1)}
+  switch (ord) {
+    case 'asc': return dataApi.sort((a, b) => (a.price > b.price) ? 1 : -1);
+    case 'desc': return dataApi.sort((a, b) => (a.price > b.price) ? -1 : 1);
+    case 'atoz': return dataApi.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    case 'ztoa': return dataApi.sort((a, b) => (a.name > b.name) ? -1 : 1);
+    default: setDataApi(dataApi);
+  }
 }
+
 const sorter = (dataApi, setDataApi, orderer, setOrderer) => {
   return (
     <div>
@@ -94,6 +92,8 @@ const sorter = (dataApi, setDataApi, orderer, setOrderer) => {
         <option value=""></option>
         <option value="desc">Maior para Menor</option>
         <option value="asc">Menor para Maior</option>
+        <option value="atoz">A -> Z</option>
+        <option value="ztoa">Z -> A</option>
       </select>
     </div>
 
@@ -116,7 +116,6 @@ function Products() {
       .then(({ data }) => { setDataApi(data); setAllProducts(data); });
   }, [token, setTitle]);
 
-  const sumLocalStorage = localStorage.getItem('cart');
   const newCart = JSON.parse(localStorage.getItem('cart')) || [];
 
   return (
@@ -130,7 +129,7 @@ function Products() {
       </div>
       <div className="render-cards">
         {renderProducts(dataApi, newCart, setCart)}
-        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(JSON.parse(sumLocalStorage)).toFixed(2).toLocaleString().replace('.', ',')}`}</p>
+        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
       </div>
       {cart.length === 0
         ? <button disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
