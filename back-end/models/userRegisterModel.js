@@ -23,7 +23,7 @@ const getByEmail = async (email) => connection()
 
 const createUser = async (name, email, password, role) => connection()
   .then((db) => db.getTable('users')
-    .insert(['name', 'email', 'password', 'role'])
+    .insert(['name', 'email', 'password', 'role', 'street', 'number', 'district', 'city'])
     .values([name, email, password, role])
     .execute())
   .then(() => ({ name, email, role }))
