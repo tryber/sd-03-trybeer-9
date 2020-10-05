@@ -8,8 +8,8 @@ const getUserInfo = async (_email) => {
       .bind('email', _email)
       .execute())
     .then((result) => result.fetchAll()[0] || []);
-  const [id, name, email, password, role] = userInfo;
-  return ({ id, name, email, password, role });
+  const [id, name, email, password, role, street, number, district, city] = userInfo;
+  return ({ id, name, email, password, role, street, number, district, city });
 };
 
 module.exports = {

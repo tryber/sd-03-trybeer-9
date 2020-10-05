@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import {
-  BrowserRouter,
   Switch,
   Route,
 } from 'react-router-dom';
+import BeerProvider from './context/context';
+
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Home from './components/Home';
@@ -19,7 +20,7 @@ import AdminOrderDetailPage from './pages/AdminOrderDetailPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BeerProvider>
       <Switch>
         <Route path="/admin/orders/:id" component={ AdminOrderDetailPage } />
         <Route path="/admin/orders" component={ AdminOrders } />
@@ -33,7 +34,8 @@ function App() {
         <Route path="/admin/profile" component={ AdminProfilePage } />
         <Route exact path="/" component={ Home } />
       </Switch>
-    </BrowserRouter>
+    </BeerProvider>
+
   );
 }
 
