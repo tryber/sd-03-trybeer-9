@@ -1,17 +1,9 @@
 const request = require('supertest');
-const server = require('../index');
-// const salesModel = require('../models/salesModel');
 
-// const productModel = require('../models/products');
-// const admin = require('../controllers/admin');
-// const adminOrderDetailService = require('../services/adminOrderDetailService');
 const orderDetailModel = require('../models/orderDetails');
-
-// const changeStatusOk = { saleId: 1, status: 'Entregue' };
-// const changeStatusError = {};
-// const orderDetailById = { saleId: 1, productId: 1, quantity: 2 };
-// const orderStatusById = { status: 'Pendente' };
-// const allProducts = { id: 1, name: 'Skol Lata 250ml', price: 2.20, urlImage: 'http://localhost:3001/images/Skol Lata 350ml.jpg' };
+const registerModel = require('../models/userRegisterModel');
+const salesModel = require('../models/salesModel');
+// const { getDetailByOrderId, getStatusOrderById } = require('../models/salesModel');
 
 describe('Test Admin Order Detail BackEnd', () => {
   afterEach(async () => {
@@ -26,6 +18,24 @@ describe('Test Admin Order Detail BackEnd', () => {
   });
 
   beforeAll(() => {
+    const server = require('../index');
+    const exec = require('child_process').exec;
+    exec('export $(cat .env | xargs)',
+      function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+    });
+    exec('mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -h $HOSTNAME < "script.sql"',
+      function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+    });
   });
 
   test('Register an user with invalid name', async () => {
@@ -65,6 +75,8 @@ describe('Test Admin Order Detail BackEnd', () => {
     expect(response.text).toBe('{"message":"Password must be a number and greather than 6 characters length","code":"invalid_data"}');
   });
   test('Register an user', async () => {
+    registerModel.getByEmail = jest.fn().mockReturnValue({});
+    registerModel.createUser = jest.fn().mockReturnValue({name: 'Marco Barbosa', email: 'marco.meireles.b@gmail.com', role: 'client'});
     const response = await request('http://localhost:3001').post('/register')
       .send({
         name: 'Marco Barbosa',
@@ -77,6 +89,14 @@ describe('Test Admin Order Detail BackEnd', () => {
     expect(response.text).toBe('{"name":"Marco Barbosa","email":"marco.meireles.b@gmail.com","role":"client"}');
   });
   test('Register an user with same e-mail', async () => {
+    registerModel.getByEmail = jest.fn().mockReturnValue({
+      id: 1,
+      name: 'Marco Barbosa',
+      email: 'marco.meireles.b@gmail.com',
+      password: 123456,
+      role: 'client',
+    });
+    registerModel.createUser = jest.fn().mockReturnValue({});
     const response = await request('http://localhost:3001').post('/register')
       .send({
         name: 'Marco Barbosa',
@@ -89,6 +109,7 @@ describe('Test Admin Order Detail BackEnd', () => {
     expect(response.text).toBe('{"message":"E-mail already in database.","code":"invalid_data"}');
   });
   test('Test if have admin orders', async () => {
+    salesModel.getDetailByOrderId = jest.fn().mockReturnValue([]);
     const response = await request('http://localhost:3001').get('/admin/orders/1');
     expect(response.text).toBe('{"message":"Order not found","code":"not_found"}');
   });
