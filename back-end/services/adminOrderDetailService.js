@@ -5,7 +5,7 @@ const adminOrderDetailService = async (req, res) => {
   const { id } = req.params;
   const result = await getDetailByOrderId(id);
 
-  if (result) {
+  if (result.length) {
     const products = await getAllProducts();
     const orderStatus = await getStatusOrderById(id);
     let orderProducts = [];

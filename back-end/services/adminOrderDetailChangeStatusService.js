@@ -1,13 +1,14 @@
-const { changeStatusOrderById } = require('../models/salesModel');
+const { changeStatusOrderById, getDetailByOrderId } = require('../models/salesModel');
 
-const adminOrderDetailService = async (req, res) => {
+const adminOrderDetailChangeService = async (req, res) => {
   const { id } = req.params;
-  const result = await changeStatusOrderById(id);
-  if (result) {
-    res.status(202).send(result);
+  const response = await getDetailByOrderId(id);
+  if (!response.length) {
+    res.status(404).send({ message: 'Order not found', code: 'invalid_data' });
   } else {
-    res.status(500).send({ message: 'Internal Server Error', code: 'server_error' });
+    const result = await changeStatusOrderById(id);
+    res.status(202).send(result);
   }
 };
 
-module.exports = adminOrderDetailService;
+module.exports = adminOrderDetailChangeService;

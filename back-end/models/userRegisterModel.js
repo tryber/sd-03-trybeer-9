@@ -18,15 +18,13 @@ const getByEmail = async (email) => connection()
       });
     }
     return undefined;
-  })
-  .catch((error) => error);
+  });
 
 const createUser = async (name, email, password, role) => connection()
   .then((db) => db.getTable('users')
     .insert(['name', 'email', 'password', 'role'])
     .values([name, email, password, role])
     .execute())
-  .then(() => ({ name, email, role }))
-  .catch((error) => error);
+  .then(() => ({ name, email, role }));
 
 module.exports = { getByEmail, createUser };

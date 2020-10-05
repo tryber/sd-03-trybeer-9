@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import RegisterUserAPI from '../services/UserRegisterService';
-
-const createUserAPI = async (name, email, password, role) => {
-  return await RegisterUserAPI(name, email, password, role)
-    .then((data) =>  data)
-    .catch((error) => error);
-};
+import createUserAPI from '../services/functions/createUserAPI';
 
 const UserRegisterForm = () => {
   const [name, setName] = useState();
