@@ -88,8 +88,9 @@
 }
 
 .btn-cart {
+  position: static;
   display: flex;
-  justify-content: center;
+  justify-content: center;  
 }
 
 .buttons {
