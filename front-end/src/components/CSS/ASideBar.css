@@ -9,7 +9,9 @@ a {
 }
 
 .divTitle {
-  color: white;
+  font-family: "Indie Flower", cursive;
+  color:black;
+  height: 20vh;
 }
 
 .menu-logout {
@@ -32,8 +34,8 @@ a {
   border-right: 1px solid;
   display: flex;
   flex-direction: column;
-  height: 100vw;
-  width: 20%;
+  height: 100%;
+  width: 20vw;
 }
 
 .white-border {
