@@ -17,7 +17,7 @@
   font-size: calc(2vw + 26px);
 }
 
-fieldset {
+.fieldsetandspan fieldset {
   padding: 20px 20px;
   display: flex;
   flex-direction: column;
@@ -32,12 +32,12 @@ fieldset {
   min-height: 70vh;
 }
 
-fieldset > span {
+.fieldsetandspan fieldset > span {
   font-size: 0.5em;
   margin-bottom: 3px;
 }
 
-fieldset > input {
+.fieldsetandspan fieldset > input {
   border: 0;
   border-bottom: 1px solid #096642;
   margin: 10px 0;
@@ -47,7 +47,7 @@ fieldset > input {
 
 
 
-fieldset button {
+.fieldsetandspan fieldset button {
   height: 50px;
   width: 50%;
   border-radius: 40px;
@@ -101,7 +101,7 @@ input[type="checkbox"]:before {
 
 }
 
-fieldset input:checked[type="checkbox"]:before {
+.fieldsetandspan fieldset input:checked[type="checkbox"]:before {
   border-left: none;
   border-top: none;
   width: 10px;

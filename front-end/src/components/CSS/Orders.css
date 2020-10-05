@@ -21,6 +21,7 @@
   margin-top: 20px;
   font-weight: 800;
   transform: scale(1);
+  transition: 0.5s;
 }
 
 .purchases-container:hover .purchases-card {
