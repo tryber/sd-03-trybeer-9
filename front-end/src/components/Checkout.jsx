@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SaleOrderAPI from '../services/SaleOrderService';
+import trash from '../img/trash.svg';
 import './CSS/Checkout.css'
 
 const createOrderAPI = async ({
@@ -238,8 +239,7 @@ const Checkout = () => {
                 className="deleteButton"
                 data-testid={`${i}-removal-button`}
                 onClick={() => removeItem(e.name)}
-              >
-                X
+              ><img src={trash} alt="delete-button"/>
               </button>
             </p>
               </div>

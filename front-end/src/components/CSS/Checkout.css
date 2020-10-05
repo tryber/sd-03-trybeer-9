@@ -80,6 +80,11 @@ img {
   width: auto;
 }
 
+.deleteButton img {
+  height: auto;
+  max-width: 25px;
+  width: 5vw;
+}
 .imgDiv {
   align-items: center;
   display: flex;
