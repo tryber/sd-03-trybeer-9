@@ -5,7 +5,7 @@ a {
 .content {
   display: flex;
   padding-left: 3%;
-  width: 80%;
+  width: 75vw;
 }
 
 .divTitle {
@@ -15,6 +15,7 @@ a {
 
 .fontStyle {
   font-family: "Indie Flower", cursive;
+  font-weight: 900;
   font-size: 3vh;
 }
 .menu-logout {

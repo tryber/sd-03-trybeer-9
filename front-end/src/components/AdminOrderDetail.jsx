@@ -18,9 +18,9 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
   }
 
   return (
-    <div>
+    <div className="orderContainer">
       { Children &&
-      <div>
+      <div className="orderDetailCard">
         <div>
           <span data-testid="order-number">Pedido {OrderNumber}</span> - <span data-testid="order-status">{Children.orderStatus[0].status}</span>
         </div>
@@ -28,7 +28,7 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
           <div className="list-container" key={e.name}>
             <div data-testid={`${i}-product-qtd`}>{e.quantity}</div>
             <div>{` - `}</div>
-            <div data-testid={`${i}-product-name`}>{e.name}</div>
+        <div data-testid={`${i}-product-name`}>{e.name}</div><span>{' - '}</span>
             <div data-testid={`${i}-product-total-value`}>{`R$ ${(e.quantity*e.price).toFixed(2).replace('.',',')}`}</div>
             <div data-testid={`${i}-order-unit-price`}>{`(R$ ${(e.price).toFixed(2).replace('.',',')})`}</div>
           </div>
@@ -42,6 +42,7 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
         <div>
           { !disableBtn &&
             <button
+              className="btn"
               data-testid="mark-as-delivered-btn" onClick={() => changeOrderStatus()}
             >Marcar como entregue</button>
           }
