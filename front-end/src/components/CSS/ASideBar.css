@@ -5,6 +5,7 @@ a {
 .content {
   display: flex;
   padding-left: 3%;
+  padding-top: 3%;
   width: 75vw;
 }
 

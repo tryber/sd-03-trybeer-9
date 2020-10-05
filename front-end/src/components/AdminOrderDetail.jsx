@@ -24,15 +24,25 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
         <div>
           <span data-testid="order-number">Pedido {OrderNumber}</span> - <span data-testid="order-status">{Children.orderStatus[0].status}</span>
         </div>
-        {Children.orderProducts.map((e, i) =>
-          <div className="list-container" key={e.name}>
-            <div data-testid={`${i}-product-qtd`}>{e.quantity}</div>
-            <div>{` - `}</div>
-        <div data-testid={`${i}-product-name`}>{e.name}</div><span>{' - '}</span>
-            <div data-testid={`${i}-product-total-value`}>{`R$ ${(e.quantity*e.price).toFixed(2).replace('.',',')}`}</div>
-            <div data-testid={`${i}-order-unit-price`}>{`(R$ ${(e.price).toFixed(2).replace('.',',')})`}</div>
-          </div>
-        )}
+        <div>
+          <table className="list-containerx">
+            <tbody>
+              <tr>
+                <th>Qtd</th>
+                <th>Nome</th>
+                <th>Valor total</th>
+                <th>Valor unitário</th>
+              </tr>
+              {Children.orderProducts.map((e, i) =>
+                <tr><td data-testid={`${i}-product-qtd`}>{e.quantity}</td>
+                  <td data-testid={`${i}-product-name`}>{e.name}</td>
+                  <td data-testid={`${i}-product-total-value`}>{`R$ ${(e.quantity*e.price).toFixed(2).replace('.',',')}`}</td>
+                  <td data-testid={`${i}-order-unit-price`}>{`(R$ ${(e.price).toFixed(2).replace('.',',')})`}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
         <div data-testid="order-total-value">
           {
           `Total R$ ${(Children.orderProducts.reduce(((acc, e) =>
