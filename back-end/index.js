@@ -11,9 +11,9 @@ const products = require('./controllers/products');
 const productList = require('./controllers/productList');
 const checkout = require('./controllers/checkout');
 const orderDetails = require('./controllers/orderDetails');
+const userInfo = require('./controllers/userInfo');
 const admin = require('./controllers/admin');
 const adminOrders = require('./controllers/adminOrders');
-const userInfo = require('./controllers/userInfo');
 
 const app = express();
 app.use(cors(), bodyParser.json());

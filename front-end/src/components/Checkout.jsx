@@ -14,7 +14,6 @@ const createOrderAPI = async ({
   saleDate,
   status,
   store,
-
 }) => await SaleOrderAPI(
   userId,
   totalPrice,
@@ -133,6 +132,7 @@ const Checkout = () => {
       status: 'Pendente',
     };
     const response = await createOrderAPI(orderJson);
+
     if (response.status === 201) {
       // delete o localStorage
       // Sobreescreva o localStorage como novo conteudo de cart
@@ -182,9 +182,7 @@ const Checkout = () => {
   }
 
   function setAddressField() {
-    console.log(deliveryCity)
     setDeliveryCity(address.city);
-    console.log(deliveryCity)
     setDeliveryNumber(address.number);
     setDeliveryDistrict(address.district);
     setDeliveryAddress(address.street);

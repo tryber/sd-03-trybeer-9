@@ -5,6 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { BeerContext } from '../context/context';
 import MenuTop from './MenuTop';
 import CardProducts from './CardProducts';
+import lupa from '../img/loupe.svg';
 
 const instance = axios.create({ baseURL: 'http://localhost:3001' });
 
@@ -32,7 +33,7 @@ const removeToBascket = (cart, name, setCart) => {
     localStorage.setItem('cart', JSON.stringify(cart));
     setCart(cart);
   }
-}
+};
 
 const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
   id, name, price, urlImage,
@@ -45,21 +46,26 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
         urlImage={urlImage}
         classImg="img-products"
       />
-      <button
-        type="button"
-        onClick={() => addTobascket(price, name, setCart)}
-        data-testid={`${index}-product-plus`}
-      >
-        +
+      <div className="buttons">
+        <button
+          className="btn btn-plus"
+          type="button"
+          onClick={() => addTobascket(price, name, setCart)}
+          data-testid={`${index}-product-plus`}
+        >
+          ▲
     </button>
-      <button
-        type="button"
-        onClick={() => removeToBascket(cart, name, setCart)}
-        data-testid={`${index}-product-minus`}
-      >
-        -
+        <p className="qtd-basket"
+          data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
+        <button
+          className="btn btn-"
+          type="button"
+          onClick={() => removeToBascket(cart, name, setCart)}
+          data-testid={`${index}-product-minus`}
+        >
+          ▼
     </button>
-      <p data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
+      </div>
     </div>
   ));
 
@@ -74,12 +80,37 @@ const filterProduct = (product, dataApi, setDataApi, allProducts) => {
   setDataApi(filteredProducts);
 };
 
+const orderProducts = (ord, dataApi, setDataApi) => {
+  switch (ord) {
+    case 'asc': return dataApi.sort((a, b) => ((a.price > b.price) ? 1 : -1));
+    case 'desc': return dataApi.sort((a, b) => ((a.price > b.price) ? -1 : 1));
+    case 'atoz': return dataApi.sort((a, b) => ((a.name > b.name) ? 1 : -1));
+    case 'ztoa': return dataApi.sort((a, b) => ((a.name > b.name) ? -1 : 1));
+    default: return setDataApi(dataApi);
+  }
+};
+
+const sorter = (dataApi, setDataApi, orderer, setOrderer) => (
+  <div className="orderer">
+    <p>Ordenar por:</p>
+    <select onChange={(e) => { setOrderer(e.target.value); orderProducts(e.target.value, dataApi, setDataApi); }} value={orderer}>
+      <option value="" />
+      <option value="desc">Maior para Menor</option>
+      <option value="asc">Menor para Maior</option>
+      <option value="atoz">{'A -> Z'}</option>
+      <option value="ztoa">{'Z -> A'}</option>
+    </select>
+  </div>
+
+);
+
 function Products() {
   const [dataApi, setDataApi] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [searchedItem, setSearchedItem] = useState('');
   const { cart, setCart, setTitle } = useContext(BeerContext);
   const [redirectLogin, setRedirectLogin] = useState(false);
+  const [orderer, setOrderer] = useState('');
   const { token } = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
@@ -95,17 +126,22 @@ function Products() {
     <div>
       {redirectLogin && <Redirect to="/login" />}
       <MenuTop />
-      <div>
-        <p>Buscar Produto</p>
-        <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
+      <div className="filters">
+        {sorter(dataApi, setDataApi, orderer, setOrderer)}
+        <div className="search-input">
+          <input onChange={(event) => { setSearchedItem(event.target.value); filterProduct(event.target.value, dataApi, setDataApi, allProducts); }} value={searchedItem} />
+          <img src={lupa} />
+        </div>
       </div>
       <div className="render-cards">
         {renderProducts(dataApi, newCart, setCart)}
-        <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
       </div>
-      {cart.length === 0
-        ? <button disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
-        : <button type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho</Link></button>}
+      <div className="btn-cart">
+        {cart.length === 0
+          ? <button className="see-cart" disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
+          : <button className="see-cart" type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho</Link></button>}
+          <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
+      </div>
     </div>
   );
 }
