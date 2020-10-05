@@ -9,11 +9,14 @@ a {
 }
 
 .divTitle {
-  font-family: "Indie Flower", cursive;
   color:black;
   height: 20vh;
 }
 
+.fontStyle {
+  font-family: "Indie Flower", cursive;
+  font-size: 3vh;
+}
 .menu-logout {
   align-items: flex-end;
   align-self: stretch;
@@ -24,6 +27,7 @@ a {
 
 .menu {
   display: flex;
+  height: 100vh;
 }
 
 .side-bar {
@@ -34,7 +38,6 @@ a {
   border-right: 1px solid;
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 20vw;
 }
 
