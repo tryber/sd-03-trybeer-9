@@ -1,6 +1,6 @@
 import React, { useState, Children } from 'react';
 import { Redirect } from 'react-router-dom';
-import ASideBar from './CSS/ASideBar.css';
+import './CSS/ASideBar.css';
 
 const AdminSideBar = ({ Children }) => {
   const [redirectToLogin, setRedirectToLogin] = useState(false);
