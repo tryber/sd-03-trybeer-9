@@ -11,8 +11,9 @@
 }
 
 .list-container {
-  display: flex;
-  flex-direction: row;
+  border: 1px black solid;
+  padding: 3%;
+  text-align: center;
 }
 
 .orderContainer {
@@ -21,14 +22,9 @@
 }
 
 .orderDetailCard {
-  border: black 1px solid;
+  border: white 1px solid;
   font-family: "Indie Flower", cursive;
-  height: 30vh;
   max-width: 600px;
+  overflow: scroll;
   width: 100%;
-}
-
-table, th, td {
-  border: 1px black solid;
-  text-align: center;
 }

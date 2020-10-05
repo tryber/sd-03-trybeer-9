@@ -25,7 +25,7 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
           <span data-testid="order-number">Pedido {OrderNumber}</span> - <span data-testid="order-status">{Children.orderStatus[0].status}</span>
         </div>
         <div>
-          <table className="list-containerx">
+          <table className="list-container">
             <tbody>
               <tr>
                 <th>Qtd</th>
@@ -34,7 +34,7 @@ const adminOrderDetail = ({Children, OrderNumber, StatusChanged}) => {
                 <th>Valor unitário</th>
               </tr>
               {Children.orderProducts.map((e, i) =>
-                <tr><td data-testid={`${i}-product-qtd`}>{e.quantity}</td>
+                <tr key={e.name}><td data-testid={`${i}-product-qtd`}>{e.quantity}</td>
                   <td data-testid={`${i}-product-name`}>{e.name}</td>
                   <td data-testid={`${i}-product-total-value`}>{`R$ ${(e.quantity*e.price).toFixed(2).replace('.',',')}`}</td>
                   <td data-testid={`${i}-order-unit-price`}>{`(R$ ${(e.price).toFixed(2).replace('.',',')})`}</td>
