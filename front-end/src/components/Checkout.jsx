@@ -195,11 +195,11 @@ const Checkout = () => {
     <div className="checkoutCard">
       <div className="beerContainer">
       {console.log(address)}
-        <h2>Produtos</h2>
+        <h2 class=".h2">Produtos</h2>
         <br />
         <div>
           {!showDisplay
-            && <h2>Não há produtos no carrinho</h2>}
+            && <h2 class=".img">Não há produtos no carrinho</h2>}
         </div>
         {/* <div>
           {showDisplay
@@ -215,7 +215,7 @@ const Checkout = () => {
             && listCart.map((e, i) => {
               actualProduct = products.data.filter((f) => f.name === e.name);
               return (<div key={`beer-item-${i}`} className="beerCard">
-              <div key={`${e.name}-img`} className="imgDiv"><img src={`${actualProduct[0].urlImage}`} alt={e.name} /></div>
+              <div key={`${e.name}-img`} className="imgDiv"><img class=".img" src={`${actualProduct[0].urlImage}`} alt={e.name} /></div>
               <div className="description">
               <p key={e.name}>
               {/* Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString */}
@@ -239,7 +239,7 @@ const Checkout = () => {
                 className="deleteButton"
                 data-testid={`${i}-removal-button`}
                 onClick={() => removeItem(e.name)}
-              ><img src={trash} alt="delete-button"/>
+              ><img class=".img" src={trash} alt="delete-button"/>
               </button>
             </p>
               </div>
@@ -261,6 +261,7 @@ const Checkout = () => {
           <legend>Endereço para entrega</legend>
           <label htmlFor="delivery_address">Rua</label>
           <input
+            class=".input"
             type="text"
             name="delivery_address"
             data-testid="checkout-street-input"
@@ -270,6 +271,7 @@ const Checkout = () => {
           <br />
           <label htmlFor="delivery_number">Número da casa</label>
           <input
+            class=".input" 
             type="text"
             name="delivery_number"
             data-testid="checkout-house-number-input"
@@ -279,6 +281,7 @@ const Checkout = () => {
           <br />
           <label htmlFor="delivery_district">Bairro</label>
           <input
+            class=".input"
             type="text"
             name="delivery_district"
             value={deliveryDistrict}
@@ -287,6 +290,7 @@ const Checkout = () => {
           <br />
           <label htmlFor="city">Cidade</label>
           <input
+            class=".input"
             type="text"
             name="delivery_city"
             value={deliveryCity}

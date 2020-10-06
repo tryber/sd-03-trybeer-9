@@ -99,21 +99,21 @@
   width: 100%;
 }
 
-h2 {
+.h2 {
   height: 5vh;
 }
 
-img {
+.img {
   height: 15vh;
   width: auto;
 }
 
-input {
+.input {
   align-self: center;
   width: 96%;
 }
 
-label {
+.label {
   align-self: flex-start;
 }
 
