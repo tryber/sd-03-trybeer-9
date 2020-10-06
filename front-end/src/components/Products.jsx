@@ -38,7 +38,7 @@ const removeToBascket = (cart, name, setCart) => {
 const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
   id, name, price, urlImage,
 }, index) => (
-    <div key={id} className="card-products">
+    <div key={id} className="card-products" style={{animationDelay: `${0.1 * index}s`}}>
       <CardProducts
         index={index}
         name={name}

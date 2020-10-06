@@ -5,7 +5,6 @@ import { BeerContext } from '../context/context';
 import MenuTop from './MenuTop';
 import './CSS/OrderDetails.css'
 
-
 const decimal = 2;
 
 function OrderDetails() {
@@ -28,6 +27,7 @@ function OrderDetails() {
   return (
     <div>
       <MenuTop />
+      {!orderNumber && <Redirect to="/orders" />}
       {redirectToLogin && <Redirect to="/login" />}
       <div className="order-details">
         <div>

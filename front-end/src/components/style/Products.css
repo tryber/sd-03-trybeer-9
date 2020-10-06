@@ -8,7 +8,9 @@
   padding-right: 10px;
   border: 1px solid black;
   transform: scaleZ(1);
+  opacity: 0;
   transition: 0.5s linear;
+  animation: animatecard 1s linear forwards;
 }
 
 .card-products:hover {
@@ -144,5 +146,14 @@
   }
   .card-products:hover {
     box-shadow: none;
+  }
+}
+
+@keyframes animatecard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
