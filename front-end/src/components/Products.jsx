@@ -137,10 +137,13 @@ function Products() {
         {renderProducts(dataApi, newCart, setCart)}
       </div>
       <div className="btn-cart">
-        {cart.length === 0
+        {newCart.length === 0
           ? <button className="see-cart" disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
-          : <button className="see-cart" type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho</Link></button>}
-          <p data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
+          : <button className="see-cart" type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho
+            <p className="cart-mobile" data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
+          </Link>
+          </button>
+        }
       </div>
     </div>
   );
