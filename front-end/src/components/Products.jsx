@@ -48,7 +48,7 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
       />
       <div className="buttons">
         <button
-          className="btn btn-plus"
+          className="btn-plus"
           type="button"
           onClick={() => addTobascket(price, name, setCart)}
           data-testid={`${index}-product-plus`}
@@ -58,7 +58,7 @@ const renderProducts = (dataApi, cart, setCart) => dataApi.map(({
         <p className="qtd-basket"
           data-testid={`${index}-product-qtd`}>{!cart ? 0 : cart.filter((e) => e.name === name).length}</p>
         <button
-          className="btn btn-"
+          className="btn-minus"
           type="button"
           onClick={() => removeToBascket(cart, name, setCart)}
           data-testid={`${index}-product-minus`}
@@ -140,10 +140,10 @@ function Products() {
         {newCart.length === 0
           ? <button className="see-cart" disabled type="button" data-testid="checkout-bottom-btn">Ver Carrinho</button>
           : <button className="see-cart" type="button" data-testid="checkout-bottom-btn"><Link to="/checkout">Ver Carrinho
-            <p className="cart-mobile" data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
           </Link>
           </button>
         }
+        <p className="cart-mobile" data-testid="checkout-bottom-btn-value">{`R$ ${cartInStorage(newCart).toFixed(2).replace('.', ',')}`}</p>
       </div>
     </div>
   );
