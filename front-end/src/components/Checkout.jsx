@@ -215,7 +215,7 @@ const Checkout = () => {
             && listCart.map((e, i) => {
               actualProduct = products.data.filter((f) => f.name === e.name);
               return (<div key={`beer-item-${i}`} className="beerCard">
-              <div key={`${e.name}-img`} className="imgDiv"><img class=".img" src={`${actualProduct[0].urlImage}`} alt={e.name} /></div>
+              <div key={`${e.name}-img`} className="imgDiv"><img className="imgWidth" src={`${actualProduct[0].urlImage}`} alt={e.name} /></div>
               <div className="description">
               <p key={e.name}>
               {/* Ref: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString */}

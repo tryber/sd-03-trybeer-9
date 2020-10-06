@@ -36,7 +36,7 @@
   flex-direction: row;
   flex-grow: 1;
   flex-wrap: wrap;
-  height: 70%;  
+  height: 70%;
 }
 
 .beerContent {
@@ -44,7 +44,6 @@
   flex-direction: column;
   flex-wrap: nowrap;
   height: 80%;
-  overflow: scroll;
 }
 
 .checkout-botton {
@@ -103,7 +102,11 @@
   height: 5vh;
 }
 
+<<<<<<< HEAD
 .img {
+=======
+.imgWidth {
+>>>>>>> e5068a09afb348014636f1caf411170ead7ef460
   height: 15vh;
   width: auto;
 }
@@ -117,11 +120,17 @@
   align-self: flex-start;
 }
 
-.deleteButton img {
+.deleteButton  {
   height: auto;
   max-width: 25px;
   width: 5vw;
+  border-style: none;
 }
+
+.deleteButton img{
+  width: 22px;
+}
+
 .imgDiv {
   align-items: center;
   display: flex;
@@ -148,6 +157,5 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 80%;
-    overflow: scroll;
   }
 }

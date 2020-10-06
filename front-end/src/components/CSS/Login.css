@@ -133,12 +133,12 @@
 @keyframes animate {
   0%{
   top: 30%;
-  left: 75%;
+  left: 85%;
   }
 
   100%{
   top: 25%;
-  left: 65%;
+  left: 75%;
   }
 }
 
@@ -155,6 +155,7 @@ opacity: 1;
 
 @media (max-width: 400px) {
   .logo img {
+    height: 40px;
     width: 40px;
   }
   .login-page div > span {
