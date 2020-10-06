@@ -42,7 +42,7 @@ function Login() {
     <div className="login-page">
       <div className="visible-area">
         <div className="logo"> <span>TR</span><img src={trybe} width="50px" /><span>BEER</span></div>
-        <img className="beer" src={beer} width="300px" />
+        <img className="beer" src={beer} width="200px" />
         <div className="login-form">
           <div>
             <p>Email</p>
