@@ -10,8 +10,6 @@ const config = {
   port: process.env.PORTDB || 33060,
 };
 
-console.log('teste', process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, process.env.HOSTNAME)
-
 module.exports = () => {
   if (connect) return Promise.resolve(connect);
   return msqlx.getSession(config)
