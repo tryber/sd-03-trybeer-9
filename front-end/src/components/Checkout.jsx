@@ -255,6 +255,7 @@ const Checkout = () => {
         </span>
       </div>
       </div>
+      <div>
       <div className="addressForm">
         <fieldset className="fieldSet">
           <legend>Endereço para entrega</legend>
@@ -309,7 +310,8 @@ const Checkout = () => {
           </button>
           <br />
         </fieldset>
-        <div><h3 style={{ color: '#ff0000' }}>{message}</h3></div>
+      </div>
+      <div><h3 style={{ color: '#ff0000' }}>{message}</h3></div>
       </div>
     </div>
   );
