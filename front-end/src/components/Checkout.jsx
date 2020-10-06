@@ -175,7 +175,7 @@ const Checkout = () => {
   if (message === 'Compra realizada com sucesso!') {
     setTimeout(() => {
       setMessage('Redirecionando');
-    }, 30000);
+    }, 2000);
   }
 
   if (message === 'Redirecionando') {
