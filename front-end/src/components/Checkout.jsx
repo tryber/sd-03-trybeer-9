@@ -253,11 +253,11 @@ const Checkout = () => {
             totalPrice.toFixed(2).replace('.', ',')
           }
         </span>
+      </div><br />
       </div>
-      </div>
-      <div>
+      <div className="checkout-botton">
       <div className="addressForm">
-        <fieldset className="fieldSet">
+        <div className="fieldSet">
           <legend>Endereço para entrega</legend>
           <label htmlFor="delivery_address">Rua</label>
           <input
@@ -309,7 +309,7 @@ const Checkout = () => {
             Finalizar Pedido
           </button>
           <br />
-        </fieldset>
+        </div>
       </div>
       <div><h3 style={{ color: '#ff0000' }}>{message}</h3></div>
       </div>
