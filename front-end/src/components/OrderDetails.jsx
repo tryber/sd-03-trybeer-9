@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { BeerContext } from '../context/context';
 import MenuTop from './MenuTop';
+import './CSS/OrderDetails.css'
 
 const decimal = 2;
 
@@ -26,17 +27,33 @@ function OrderDetails() {
   return (
     <div>
       <MenuTop />
+      {!orderNumber && <Redirect to="/orders" />}
       {redirectToLogin && <Redirect to="/login" />}
-      <h3 data-testid="order-number">{`Pedido ${orderNumber}`}</h3>
-      <h3 data-testid="order-date">{orderInfo.date}</h3>
-      {orderDetails.map(({ name, quantity, price }, index) => (
-        <div key={ name }>
-          <span data-testid={ `${index}-product-qtd` }>{`${quantity}`}</span>
-          <span data-testid={ `${index}-product-name` }>{name}</span>
-          <span data-testid={ `${index}-product-total-value` }>{`R$ ${(quantity * price).toFixed(decimal).replace('.', ',')}`}</span>
+      <div className="order-details">
+        <div>
+          <h3 data-testid="order-number">{`Pedido ${orderNumber}`}</h3>
+          <h3 data-testid="order-date">Data do Pedido {orderInfo.date}</h3>
         </div>
-      ))}
-      <h3 data-testid="order-total-value">{`R$ ${Number(orderInfo.total).toFixed(decimal).replace('.', ',')}`}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Quantidade</th>
+              <th>Produto</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orderDetails.map(({ name, quantity, price }, index) => (
+              <tr key={name}>
+                <td data-testid={`${index}-product-qtd`}>{`${quantity}`}</td>
+                <td data-testid={`${index}-product-name`}>{name}</td>
+                <td data-testid={`${index}-product-total-value`}>{`R$ ${(quantity * price).toFixed(decimal).replace('.', ',')}`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h3 data-testid="order-total-value">{`Valor total: R$ ${Number(orderInfo.total).toFixed(decimal).replace('.', ',')}`}</h3>
+      </div>
     </div>
   );
 }
