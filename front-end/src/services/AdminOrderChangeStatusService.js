@@ -4,7 +4,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const AdminChangeStatusOrderAPI = (id) => axios.put(`http://http://trybeerbackend.herokuapp.com/admin/orders/${id}`,
+const AdminChangeStatusOrderAPI = (id) => axios.put(`http://localhost:3001/admin/orders/${id}`,
   {
     id,
   },

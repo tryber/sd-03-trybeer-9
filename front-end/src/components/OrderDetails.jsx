@@ -16,7 +16,7 @@ function OrderDetails() {
 
   useEffect(() => {
     setTitle('Detalhes de Pedido');
-    axios.get(`http://trybeerbackend.herokuapp.com/${orderNumber}`, {
+    axios.get(`http://localhost:3001/orderDetails/${orderNumber}`, {
       headers: {
         Authorization: token,
       },
