@@ -7,7 +7,7 @@ import avatar from '../img/man.svg';
 import './CSS/Profile.css';
 
 const saveNewUserInfo = (name, email, token, role, setMessage) => {
-  axios.post('http://localhost:3001/profile', { name, email })
+  axios.post('http://trybeerbackend.herokuapp.com/profile', { name, email })
     .then(() => setMessage(true));
   localStorage.setItem('user', JSON.stringify({
     name, email, token, role,

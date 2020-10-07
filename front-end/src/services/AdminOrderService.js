@@ -4,7 +4,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const AdminDetailOrderAPI = (id) => axios.get(`http://localhost:3001/admin/orders/${id}`,
+const AdminDetailOrderAPI = (id) => axios.get(`http://trybeerbackend.herokuapp.com/admin/orders/${id}`,
   {
     id,
   },
