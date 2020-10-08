@@ -19,7 +19,7 @@ const cardOrders = (orders) => (
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3001/adminOrders').then(({ data }) => setOrders(data));
+    axios.get('http://trybeerbackend.herokuapp.com/adminOrders').then(({ data }) => setOrders(data));
   }, []);
 
   return (

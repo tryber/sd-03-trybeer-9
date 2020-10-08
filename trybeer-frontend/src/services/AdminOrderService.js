@@ -4,7 +4,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const AdminChangeStatusOrderAPI = (id) => axios.put(`http://localhost:3001/admin/orders/${id}`,
+const AdminDetailOrderAPI = (id) => axios.get(`http://trybeerbackend.herokuapp.com/admin/orders/${id}`,
   {
     id,
   },
@@ -12,4 +12,4 @@ const AdminChangeStatusOrderAPI = (id) => axios.put(`http://localhost:3001/admin
   .then((res) => res)
   .catch((error) => error);
 
-export default AdminChangeStatusOrderAPI;
+export default AdminDetailOrderAPI;
