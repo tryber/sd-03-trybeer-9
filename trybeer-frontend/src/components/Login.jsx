@@ -6,14 +6,12 @@ import trybe from '../img/trybe.png'
 import beer from '../img/green-beer.png'
 
 const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAdminHome) => {
-  console.log('teste')
   axios.post('http://trybeerbackend.herokuapp.com/login', { password, email })
     .then(({
       data: {
         token, name, email: _email, role,
       },
     }) => {
-      console.log(name)
       localStorage.setItem('user', JSON.stringify({
         token, name, email: _email, role,
       }));
@@ -26,7 +24,6 @@ const doLogin = (password, email, setMessage, setRedirectToHome, setRedirectToAd
 const verifyInput = (email, password, setDisabled) => {
   const minLenght = 4;
   const regex = /^\S+@\S+$/;
-  console.log(email, password)
   if ((email.match(regex)) && (password.length > minLenght)) { setDisabled(false); }
 };
 
