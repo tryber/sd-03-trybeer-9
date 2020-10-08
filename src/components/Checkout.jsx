@@ -45,7 +45,7 @@ const Checkout = () => {
     const headers = {
       'Content-Type': 'application/json',
     };
-    axios.get('http://trybeerbackend.herokuapp.com/products',
+    axios.get('https://trybeerbackend.herokuapp.com/products',
   {
     products: 'All',
   },
@@ -58,7 +58,7 @@ const Checkout = () => {
     // Inicializacao do sensor de mudança do localStorage
     setLocalStorageActualized(() => false);
     const { email } = JSON.parse(localStorage.getItem('user')) || [];
-    axios.post('http://trybeerbackend.herokuapp.com/userInfo', { email })
+    axios.post('https://trybeerbackend.herokuapp.com/userInfo', { email })
     .then((response) => setAddress(response.data));
   }, []);
 

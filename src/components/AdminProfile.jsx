@@ -8,7 +8,7 @@ const AdminProfile = () => {
   const { token, email, name } = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {
-    axios.get('http://trybeerbackend.herokuapp.com/profile', {
+    axios.get('https://trybeerbackend.herokuapp.com/profile', {
       headers: {
         Authorization: token,
       }

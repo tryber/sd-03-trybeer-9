@@ -14,7 +14,7 @@ const SaleOrderAPI = (
   saleDate,
   status,
   store,
-) => axios.post('http://trybeerbackend.herokuapp.com/checkout',
+) => axios.post('https://trybeerbackend.herokuapp.com/checkout',
   {
     userId,
     totalPrice,
